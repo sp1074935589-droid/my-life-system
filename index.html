@@ -2,125 +2,165 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>成长驾驶舱 v5.1</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>个人成长操作系统 v5.4</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+*{box-sizing:border-box}
+
+:root{
+  --bg:#f5f6f8;
+  --card:#fff;
+  --text:#202124;
+  --sub:#6b7280;
+  --line:#e5e7eb;
+  --primary:#111827;
+  --soft:#f0f2f5;
+  --green:#16a34a;
+  --orange:#ea580c;
+  --blue:#2563eb;
+  --red:#dc2626;
+  --purple:#7c3aed;
+}
+
+body.dark{
+  --bg:#111315;
+  --card:#1b1e21;
+  --text:#f3f4f6;
+  --sub:#9ca3af;
+  --line:#30343a;
+  --primary:#f3f4f6;
+  --soft:#25292e;
 }
 
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
-  "Microsoft YaHei",sans-serif;
-  background:#f5f7fb;
-  color:#172033;
-  line-height:1.6;
-}
-
-body.dark{
-  background:#11151c;
-  color:#e8edf5;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,
+  "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
 }
 
 .container{
-  width:min(720px,94%);
-  margin:0 auto;
-  padding:18px 0 50px;
+  width:min(960px,94%);
+  margin:auto;
+  padding:20px 0 60px;
 }
 
 header{
-  padding:12px 4px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
 }
 
 h1{
   margin:0;
-  font-size:28px;
+  font-size:24px;
 }
 
 .subtitle{
-  color:#718096;
+  color:var(--sub);
   font-size:13px;
-}
-
-.dark .subtitle{
-  color:#98a2b3;
-}
-
-.date-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:12px 0;
+  margin-top:4px;
 }
 
 button{
   border:0;
   border-radius:10px;
   padding:9px 13px;
+  background:var(--primary);
+  color:var(--bg);
   cursor:pointer;
-  background:#e9edf5;
-  color:#243047;
   font-size:14px;
+  transition:.15s;
 }
 
-.dark button{
-  background:#252c38;
-  color:#e9edf5;
+button:hover{
+  opacity:.85;
+  transform:translateY(-1px);
 }
 
-button:active{
-  transform:scale(.97);
+button.secondary{
+  background:var(--soft);
+  color:var(--text);
 }
 
-.primary{
-  background:#172033;
-  color:white;
+button.small{
+  padding:6px 9px;
+  font-size:12px;
 }
 
-.dark .primary{
-  background:#e8edf5;
-  color:#11151c;
+button.active{
+  outline:2px solid var(--blue);
+}
+
+button.danger{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+body.dark button.danger{
+  background:#431b1b;
+  color:#fca5a5;
 }
 
 .card{
-  background:white;
-  border-radius:18px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
   padding:18px;
-  margin:14px 0;
-  box-shadow:0 4px 18px rgba(20,30,50,.06);
+  margin-bottom:15px;
 }
 
-.dark .card{
-  background:#191f28;
-  box-shadow:none;
+.hero{
+  border:1px solid var(--line);
+  background:var(--card);
 }
 
-.card h2{
-  font-size:18px;
-  margin:0 0 12px;
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:13px;
 }
 
-.card h3{
-  margin:0 0 8px;
+.section-title h2{
+  margin:0;
+  font-size:17px;
 }
 
-.muted{
-  color:#7c8799;
-  font-size:13px;
+.tag{
+  display:inline-block;
+  background:var(--soft);
+  color:var(--sub);
+  padding:4px 8px;
+  border-radius:20px;
+  font-size:11px;
 }
 
-textarea,
-input{
+.datebar{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin-bottom:15px;
+}
+
+.datebar strong{
+  min-width:150px;
+  text-align:center;
+}
+
+textarea,input{
   width:100%;
-  border:1px solid #dce2ec;
-  background:#fafbfd;
-  color:#172033;
-  border-radius:12px;
-  padding:12px;
-  font-size:15px;
+  border:1px solid var(--line);
+  background:var(--bg);
+  color:var(--text);
+  border-radius:10px;
+  padding:11px;
+  font-size:14px;
   outline:none;
 }
 
@@ -129,280 +169,385 @@ textarea{
   resize:vertical;
 }
 
-.dark textarea,
-.dark input{
-  background:#11161e;
-  color:#e8edf5;
-  border-color:#303846;
+textarea:focus,
+input:focus{
+  border-color:var(--blue);
 }
 
 .row{
   display:flex;
   gap:8px;
-  align-items:center;
+  flex-wrap:wrap;
 }
 
-.row>*{
-  flex:1;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
+
+.prompt-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.prompt{
+  padding:14px;
+  background:var(--soft);
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.prompt b{
+  display:block;
+  margin-bottom:5px;
+}
+
+.prompt span{
+  font-size:12px;
+  color:var(--sub);
+}
+
+/* 评分 */
 
 .score{
-  font-size:46px;
-  font-weight:800;
-  text-align:center;
-  margin:4px 0;
-}
-
-.score-label{
-  text-align:center;
-  color:#718096;
-  font-size:13px;
-}
-
-.progress{
-  height:9px;
-  border-radius:99px;
-  background:#e7ebf2;
-  overflow:hidden;
-  margin-top:12px;
-}
-
-.dark .progress{
-  background:#303744;
-}
-
-.progress-inner{
-  height:100%;
-  width:0%;
-  background:#172033;
-  transition:.3s;
-}
-
-.dark .progress-inner{
-  background:#e8edf5;
-}
-
-.score-grid{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:7px;
-  margin-top:15px;
+  grid-template-columns:repeat(6,1fr);
+  gap:8px;
 }
 
 .score-item{
-  background:#f4f6fa;
-  border-radius:10px;
-  padding:9px 4px;
+  background:var(--soft);
+  border-radius:12px;
+  padding:10px;
   text-align:center;
 }
 
-.dark .score-item{
-  background:#222934;
-}
-
-.score-item b{
+.score-item strong{
   display:block;
-  font-size:17px;
+  font-size:19px;
+  margin-top:3px;
 }
 
-.score-item span{
-  display:block;
-  font-size:11px;
-  color:#7d8797;
+.score-item.core{
+  border:1px solid var(--blue);
 }
 
-.task{
-  display:flex;
-  gap:9px;
-  align-items:flex-start;
-  padding:10px 0;
-  border-bottom:1px solid #edf0f5;
-}
-
-.dark .task{
-  border-color:#2c333e;
-}
-
-.task:last-child{
-  border-bottom:0;
-}
-
-.task input{
-  width:auto;
-  margin-top:6px;
-}
-
-.task-title{
-  font-weight:600;
-}
-
-.task-result{
-  margin-top:6px;
-  font-size:13px;
-}
-
-.small-btn{
-  padding:6px 9px;
-  font-size:12px;
-}
-
-.question-type{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:8px;
-  background:#eef1f6;
-  font-size:12px;
-  margin-bottom:8px;
-}
-
-.dark .question-type{
-  background:#29313d;
-}
-
-.answer{
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
   margin-top:10px;
 }
 
-.reference{
-  display:none;
-  margin-top:12px;
-  padding:12px;
-  border-radius:10px;
-  background:#f4f6f9;
+.progress div{
+  height:100%;
+  width:0;
+  background:var(--blue);
+  transition:.3s;
+}
+
+.score-message{
+  margin-top:9px;
+  font-size:12px;
+  color:var(--sub);
+}
+
+/* 核心行动 */
+
+.action-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+  padding:11px 13px;
+  border-radius:11px;
+  background:var(--soft);
   font-size:13px;
 }
 
-.dark .reference{
-  background:#222933;
+.action-status strong{
+  color:var(--blue);
 }
 
-.words{
+.action-flow{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
-.word{
-  border:1px solid #e4e8ef;
-  border-radius:14px;
-  padding:13px;
+.flow-box{
+  padding:12px;
+  border-radius:12px;
+  background:var(--soft);
 }
 
-.dark .word{
-  border-color:#303744;
+.flow-box b{
+  display:block;
+  margin-bottom:7px;
+  font-size:13px;
+}
+
+/* 问题 */
+
+.question{
+  font-size:16px;
+  line-height:1.7;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.question-meta{
+  color:var(--sub);
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.reference{
+  display:none;
+  background:var(--soft);
+  padding:13px;
+  border-radius:10px;
+  margin-top:10px;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.feedback-box{
+  display:none;
+  margin-top:10px;
+  padding:13px;
+  border-radius:10px;
+  background:var(--soft);
+  border-left:3px solid var(--blue);
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* 英语 */
+
+.word{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.word:last-child{
+  border-bottom:0;
 }
 
 .word-main{
+  flex:1;
+}
+
+.word-main b{
+  font-size:16px;
+}
+
+.word-main small{
+  color:var(--sub);
+}
+
+.word-buttons{
+  display:flex;
+  gap:5px;
+}
+
+.word-buttons button{
+  font-size:11px;
+  padding:6px 8px;
+}
+
+.word-buttons .known{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.word-buttons .fuzzy{
+  background:#ffedd5;
+  color:#9a3412;
+}
+
+.word-buttons .unknown{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+body.dark .word-buttons .known{
+  background:#163522;
+  color:#86efac;
+}
+
+body.dark .word-buttons .fuzzy{
+  background:#422616;
+  color:#fdba74;
+}
+
+body.dark .word-buttons .unknown{
+  background:#431b1b;
+  color:#fca5a5;
+}
+
+.review-box{
+  background:var(--soft);
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+.review-box b{
+  display:block;
+  margin-bottom:6px;
+}
+
+/* 完成事项 */
+
+.completed{
+  padding:9px 11px;
+  background:var(--soft);
+  border-radius:9px;
+  margin-bottom:7px;
+  font-size:13px;
+}
+
+.completed-row{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   gap:8px;
 }
 
-.word-name{
-  font-size:20px;
-  font-weight:750;
-}
-
-.word-pos{
-  font-size:11px;
-  color:#8b95a5;
-  margin-left:5px;
-}
-
-.word-ipa{
-  font-family:"Times New Roman",serif;
-  font-size:14px;
-  margin-top:2px;
-}
-
-.word-meaning{
-  font-size:13px;
-  color:#667085;
-  margin-top:2px;
-}
-
-.dark .word-meaning{
-  color:#aab2c0;
-}
-
-.audio-buttons{
-  display:flex;
-  gap:5px;
-  margin-top:9px;
-}
-
-.audio-buttons button{
-  padding:6px 8px;
-  font-size:12px;
-}
-
-.mastery{
-  display:flex;
-  gap:5px;
-  margin-top:9px;
-}
-
-.mastery button{
+.completed-row span{
   flex:1;
-  font-size:11px;
-  padding:6px 3px;
 }
 
-.mastery .active{
-  outline:2px solid #172033;
-}
-
-.dark .mastery .active{
-  outline:2px solid #e8edf5;
-}
-
-.review-word{
-  margin:10px 0;
-  padding:12px;
-  border-radius:12px;
-  background:#f5f7fa;
-}
-
-.dark .review-word{
-  background:#222934;
-}
-
-.notice{
-  padding:10px 12px;
-  border-radius:10px;
-  background:#f2f5f9;
-  color:#667085;
+.empty{
+  color:var(--sub);
   font-size:13px;
-  margin-top:10px;
 }
 
-.dark .notice{
-  background:#222934;
-  color:#aeb6c4;
+/* 周复盘 */
+
+.week-score{
+  font-size:30px;
+  font-weight:700;
 }
 
-.hidden{
-  display:none!important;
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:12px;
+}
+
+.stat{
+  background:var(--soft);
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+}
+
+.stat small{
+  color:var(--sub);
+}
+
+.stat strong{
+  display:block;
+  margin-top:4px;
+}
+
+.insight{
+  margin-top:15px;
+  padding:13px;
+  border-radius:12px;
+  background:var(--soft);
+  border-left:3px solid var(--purple);
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* 最近七天 */
+
+.day-row{
+  padding:11px;
+  background:var(--soft);
+  border-radius:10px;
+  margin-bottom:7px;
+}
+
+.day-main{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.day-sub{
+  color:var(--sub);
+  font-size:11px;
+  margin-top:5px;
+}
+
+.score-high{
+  color:var(--green);
+}
+
+.score-mid{
+  color:var(--orange);
+}
+
+.score-low{
+  color:var(--red);
 }
 
 footer{
   text-align:center;
-  color:#8a94a5;
+  color:var(--sub);
   font-size:12px;
-  padding-top:20px;
+  margin-top:30px;
 }
 
-@media(max-width:520px){
-  .words{
-    grid-template-columns:1fr;
-  }
+@media(max-width:700px){
 
-  .score-grid{
-    grid-template-columns:repeat(5,1fr);
+  .container{
+    width:94%;
+    padding-top:14px;
   }
 
   h1{
-    font-size:25px;
+    font-size:21px;
+  }
+
+  .grid,
+  .prompt-grid,
+  .action-flow{
+    grid-template-columns:1fr;
+  }
+
+  .score{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .stat-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .word{
+    align-items:flex-start;
+  }
+
+  .word-buttons{
+    flex-direction:column;
+  }
+
+  .datebar strong{
+    min-width:120px;
+    font-size:13px;
   }
 }
 </style>
@@ -413,223 +558,420 @@ footer{
 <div class="container">
 
 <header>
-  <h1>成长驾驶舱</h1>
-  <div class="subtitle">v5.1 · 先行动，再完善</div>
+  <div>
+    <h1>个人成长操作系统</h1>
+    <div class="subtitle">
+      v5.4 · 不是为了刷分，而是为了留下真实反馈。
+    </div>
+  </div>
+
+  <button class="secondary" onclick="toggleDark()">☾</button>
 </header>
 
-<div class="date-nav">
-  <button onclick="changeDate(-1)">← 上一天</button>
-  <strong id="dateText"></strong>
-  <button onclick="changeDate(1)">下一天 →</button>
+
+<!-- 日期 -->
+
+<div class="datebar">
+
+  <button class="secondary" onclick="changeDate(-1)">‹</button>
+
+  <strong id="dateTitle"></strong>
+
+  <button class="secondary" onclick="goToday()">今天</button>
+
+  <button class="secondary" onclick="changeDate(1)">›</button>
+
 </div>
 
-<div class="row">
-  <button onclick="goToday()">回到今天</button>
-  <button onclick="toggleDark()">🌙 深色模式</button>
-</div>
 
+<!-- =========================
+     今日成长分
+========================= -->
 
-<!-- 成长分 -->
+<section class="card hero">
 
-<section class="card">
-  <h2>📈 今日成长分</h2>
+  <div class="section-title">
+    <h2>今日成长分</h2>
+    <span class="tag">满分 100</span>
+  </div>
 
-  <div class="score" id="score">0</div>
-  <div class="score-label">满分 100</div>
+  <div class="score">
+
+    <div class="score-item core">
+      行动
+      <strong id="sAction">0</strong>
+    </div>
+
+    <div class="score-item">
+      身体
+      <strong id="sBody">0</strong>
+    </div>
+
+    <div class="score-item">
+      英语
+      <strong id="sEnglish">0</strong>
+    </div>
+
+    <div class="score-item">
+      商业/经济
+      <strong id="sLearn">0</strong>
+    </div>
+
+    <div class="score-item">
+      观察
+      <strong id="sObserve">0</strong>
+    </div>
+
+    <div class="score-item">
+      突破
+      <strong id="sBreak">0</strong>
+    </div>
+
+  </div>
 
   <div class="progress">
-    <div class="progress-inner" id="progress"></div>
+    <div id="scoreBar"></div>
   </div>
 
-  <div class="score-grid">
-    <div class="score-item">
-      <b id="sAction">0</b>
-      <span>行动</span>
-    </div>
+  <div id="scoreMessage" class="score-message"></div>
 
-    <div class="score-item">
-      <b id="sBody">0</b>
-      <span>身体</span>
-    </div>
-
-    <div class="score-item">
-      <b id="sEnglish">0</b>
-      <span>英语</span>
-    </div>
-
-    <div class="score-item">
-      <b id="sLearn">0</b>
-      <span>学习</span>
-    </div>
-
-    <div class="score-item">
-      <b id="sObserve">0</b>
-      <span>观察</span>
-    </div>
-  </div>
-
-  <div class="notice">
-    ⚠️ 规则：如果今天没有真正行动，成长分最高只能得到 30 分。
-  </div>
 </section>
 
 
-<!-- 今日关键动作 -->
+<!-- =========================
+     核心行动
+========================= -->
 
 <section class="card">
-  <h2>🎯 今日关键动作</h2>
 
-  <textarea
-    id="keyAction"
-    placeholder="今天最重要、最值得完成的一件事是什么？"
-    oninput="saveCurrent()"
-  ></textarea>
-
-  <div style="margin-top:10px">
-    <textarea
-      id="actionResult"
-      placeholder="结果是什么？尽量写事实，不写“感觉不错”。"
-      oninput="saveCurrent()"
-    ></textarea>
+  <div class="section-title">
+    <h2>① 今日关键动作</h2>
+    <span class="tag">核心反馈</span>
   </div>
+
+  <div class="action-status">
+    <span>今天有没有真正进入现实？</span>
+    <strong id="actionState">尚未完成</strong>
+  </div>
+
+  <div class="action-flow">
+
+    <div class="flow-box">
+
+      <b>我要做什么？</b>
+
+      <textarea
+        id="keyAction"
+        placeholder="只写一件真正需要在现实中完成的事情。&#10;&#10;例如：找一个健身新手完成一次真实需求访谈。">
+      </textarea>
+
+    </div>
+
+    <div class="flow-box">
+
+      <b>实际发生了什么？</b>
+
+      <textarea
+        id="keyResult"
+        placeholder="不要写“感觉不错”。&#10;&#10;写事实：做了什么、对方怎么回应、得到什么结果。">
+      </textarea>
+
+    </div>
+
+  </div>
+
+  <div class="row" style="margin-top:10px">
+
+    <button onclick="saveCurrent()">
+      保存今日行动
+    </button>
+
+  </div>
+
+  <div class="insight" style="margin-top:12px">
+
+    <b>系统原则：</b>
+    没有真实结果，思考只能算准备。
+    今天可以什么都没完成，但不要把“想过”伪装成“做过”。
+
+  </div>
+
 </section>
 
 
-<!-- 今日任务 -->
+<!-- =========================
+     身体
+========================= -->
 
 <section class="card">
-  <h2>✅ 今日完成</h2>
-  <div id="tasks"></div>
 
-  <textarea
-    id="customTask"
-    placeholder="添加今天新完成的一件事情……"
-    style="margin-top:10px"
-  ></textarea>
-
-  <button class="primary" style="margin-top:8px" onclick="addCustomTask()">
-    添加完成事项
-  </button>
-</section>
-
-
-<!-- 身体 -->
-
-<section class="card">
-  <h2>🏋️ 身体</h2>
+  <div class="section-title">
+    <h2>② 身体</h2>
+    <span class="tag">训练 / 睡眠 / 饮食</span>
+  </div>
 
   <textarea
     id="body"
-    placeholder="今天身体做了什么？训练了什么？有什么变化？"
-    oninput="saveCurrent()"
-  ></textarea>
+    placeholder="今天身体做了什么？训练了什么？睡眠和饮食怎么样？">
+  </textarea>
+
+  <div style="height:8px"></div>
+
+  <button onclick="saveCurrent()">
+    保存身体记录
+  </button>
+
 </section>
 
 
-<!-- 商业 / 经济 -->
+<!-- =========================
+     商业 / 经济
+========================= -->
 
 <section class="card">
-  <h2 id="questionTitle">🧠 今日思考</h2>
 
-  <div class="question-type" id="questionType"></div>
+  <div class="section-title">
 
-  <h3 id="question"></h3>
+    <h2 id="learnTitle">③ 商业思考</h2>
+
+    <span class="tag">一天一题</span>
+
+  </div>
+
+  <div class="question-meta" id="questionMeta"></div>
+
+  <div class="question" id="question"></div>
 
   <textarea
-    id="thinking"
-    class="answer"
-    placeholder="先写你的判断，再考虑原因。不要急着找标准答案。"
-    oninput="saveCurrent()"
-  ></textarea>
+    id="learnAnswer"
+    placeholder="先自己回答。&#10;&#10;不要追求标准答案，重点是你的判断过程。">
+  </textarea>
 
   <div class="row" style="margin-top:8px">
-    <button onclick="showReference()">查看参考分析</button>
+
+    <button onclick="saveCurrent()">
+      保存回答
+    </button>
+
+    <button class="secondary" onclick="showReference()">
+      查看参考分析
+    </button>
+
   </div>
 
   <div class="reference" id="reference"></div>
+
+  <div class="feedback-box" id="answerFeedback"></div>
+
+  <button
+    id="feedbackButton"
+    class="secondary small"
+    style="display:none;margin-top:8px"
+    onclick="analyzeAnswer()">
+    分析我的回答
+  </button>
+
 </section>
 
 
-<!-- 观察 -->
+<!-- =========================
+     昨日复盘
+========================= -->
+
+<section class="card" id="yesterdayCard">
+
+  <div class="section-title">
+
+    <h2>④ 昨日复盘</h2>
+
+    <span class="tag">第二天检查</span>
+
+  </div>
+
+  <div id="yesterdayContent"></div>
+
+</section>
+
+
+<!-- =========================
+     今日英语
+========================= -->
 
 <section class="card">
-  <h2>👀 今日发现</h2>
+
+  <div class="section-title">
+
+    <h2>⑤ 今日英语</h2>
+
+    <span class="tag">12 words</span>
+
+  </div>
+
+  <div id="wordList"></div>
+
+  <div style="margin-top:10px;color:var(--sub);font-size:12px">
+
+    “模糊 / 不会”不会消失，会进入后续复习逻辑。
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     观察
+========================= -->
+
+<section class="card">
+
+  <div class="section-title">
+
+    <h2>⑥ 今日观察</h2>
+
+    <span class="tag">现实世界</span>
+
+  </div>
 
   <textarea
-    id="discovery"
-    placeholder="今天观察到一个什么规律、需求、商业机会或人的行为？"
-    oninput="saveCurrent()"
-  ></textarea>
+    id="observation"
+    placeholder="今天观察到什么规则、需求、商业现象、人性或生活细节？&#10;&#10;尽量写：发生了什么 → 为什么 → 你原来哪里想错了。">
+  </textarea>
+
+  <div style="height:8px"></div>
+
+  <button onclick="saveCurrent()">
+    保存观察
+  </button>
+
 </section>
 
 
-<!-- 突破 -->
+<!-- =========================
+     突破
+========================= -->
 
 <section class="card">
-  <h2>🚪 今日突破</h2>
+
+  <div class="section-title">
+
+    <h2>⑦ 今日突破</h2>
+
+    <span class="tag">做一点原本不敢做的</span>
+
+  </div>
 
   <textarea
     id="breakthrough"
-    placeholder="今天做了什么以前不太敢做、不会做或一直拖延的事情？"
-    oninput="saveCurrent()"
-  ></textarea>
+    placeholder="今天做了什么平时会害怕、拖延或逃避的事情？&#10;&#10;没有就直接写：今天没有。不要为了分数编。">
+  </textarea>
+
+  <div style="height:8px"></div>
+
+  <button onclick="saveCurrent()">
+    保存突破
+  </button>
+
 </section>
 
 
-<!-- 英语 -->
+<!-- =========================
+     今日完成
+========================= -->
 
 <section class="card">
 
-  <h2>🇺🇸 今日英语</h2>
+  <div class="section-title">
 
-  <div class="muted">
-    每天 12 个词 · 美式音频 · IPA · 正常 / 0.7×慢速 · 第二天复习
+    <h2>⑧ 今日完成</h2>
+
+    <span class="tag">小事也留下证据</span>
+
   </div>
 
-  <div id="englishStatus" class="notice"></div>
+  <div id="completedList"></div>
 
-  <div class="words" id="words"></div>
+  <textarea
+    id="custom"
+    placeholder="添加今天已经完成的小事情。&#10;&#10;例如：完成训练 / 学完一节英语 / 联系一个人 / 发布作品。">
+  </textarea>
+
+  <div style="height:8px"></div>
+
+  <button onclick="addCustom()">
+    添加完成事项
+  </button>
 
 </section>
 
 
-<!-- 昨日复习 -->
+<!-- =========================
+     明日
+========================= -->
 
 <section class="card">
 
-  <h2>🔄 昨日英语复习</h2>
+  <div class="section-title">
 
-  <div class="muted">
-    不修改昨天的学习记录，只记录今天是否完成复习。
+    <h2>⑨ 明日最重要动作</h2>
+
+    <span class="tag">只允许 1 件</span>
+
   </div>
-
-  <div id="reviewWords"></div>
-
-</section>
-
-
-<!-- 明日 -->
-
-<section class="card">
-  <h2>🌅 明日行动</h2>
 
   <textarea
     id="tomorrow"
-    placeholder="明天第一件要做的具体事情是什么？"
-    oninput="saveCurrent()"
-  ></textarea>
+    placeholder="明天只写最重要的 1 件事。&#10;&#10;如果这里写了 5 件，实际上就是没有优先级。">
+  </textarea>
+
+  <div style="height:8px"></div>
+
+  <button onclick="saveCurrent()">
+    保存
+  </button>
+
 </section>
 
 
-<!-- 七日 -->
+<!-- =========================
+     每周复盘
+========================= -->
 
 <section class="card">
-  <h2>📊 最近 7 个成长日</h2>
-  <div id="week"></div>
+
+  <div class="section-title">
+
+    <h2>⑩ 每周总结复盘</h2>
+
+    <span class="tag" id="weekStatus">每7天一次</span>
+
+  </div>
+
+  <div id="weeklyContent"></div>
+
 </section>
 
+
+<!-- =========================
+     最近七天
+========================= -->
+
+<section class="card">
+
+  <div class="section-title">
+
+    <h2>最近 7 个成长日</h2>
+
+    <span class="tag">看趋势，不看单日输赢</span>
+
+  </div>
+
+  <div id="recent7"></div>
+
+</section>
+
+
 <footer>
-  成长不是每天想明白，而是每天留下现实反馈。
+  成长不是每天证明自己很厉害，而是不断获得真实反馈。
 </footer>
 
 </div>
@@ -637,1353 +979,1336 @@ footer{
 
 <script>
 
-const STORAGE_KEY = "life_system_v5_1";
+/* =========================================================
+   v5.4 数据库
+========================================================= */
 
-const oldKeys = [
-  "life_system_v5",
+const DB_KEY="life_system_v5_4";
+
+const OLD_KEYS=[
+  "life_system_v5_3",
+  "life_system_v5_2",
   "life_system_v4_1",
   "life_system_v3"
 ];
 
-let db = loadDB();
 
-let selectedDate = getGrowthDate(new Date());
+/* =========================================================
+   英语词汇
+========================================================= */
+
+const vocab=[
+
+["abandon","v.","/əˈbændən/","放弃；抛弃"],
+["ability","n.","/əˈbɪləti/","能力"],
+["absolute","adj.","/ˈæbsəluːt/","绝对的"],
+["achieve","v.","/əˈtʃiːv/","实现；达到"],
+["adapt","v.","/əˈdæpt/","适应"],
+["adequate","adj.","/ˈædɪkwət/","足够的；适当的"],
+["alternative","n./adj.","/ɔːlˈtɜːrnətɪv/","替代方案；替代的"],
+["analyze","v.","/ˈænəlaɪz/","分析"],
+["approach","n./v.","/əˈproʊtʃ/","方法；接近"],
+["assume","v.","/əˈsuːm/","假设"],
+["benefit","n./v.","/ˈbenɪfɪt/","好处；受益"],
+["challenge","n./v.","/ˈtʃælɪndʒ/","挑战"],
+["concept","n.","/ˈkɑːnsept/","概念"],
+["consume","v.","/kənˈsuːm/","消费"],
+["demand","n.","/dɪˈmænd/","需求"],
+["efficient","adj.","/ɪˈfɪʃənt/","高效的"],
+["estimate","v./n.","/ˈestɪmeɪt/","估计"],
+["evidence","n.","/ˈevɪdəns/","证据"],
+["expand","v.","/ɪkˈspænd/","扩大"],
+["feature","n.","/ˈfiːtʃər/","特点；功能"],
+["flexible","adj.","/ˈfleksəbəl/","灵活的"],
+["generate","v.","/ˈdʒenəreɪt/","产生"],
+["identify","v.","/aɪˈdentɪfaɪ/","识别；发现"],
+["impact","n./v.","/ˈɪmpækt/","影响"],
+["income","n.","/ˈɪnkʌm/","收入"],
+["individual","n./adj.","/ˌɪndɪˈvɪdʒuəl/","个人；个人的"],
+["invest","v.","/ɪnˈvest/","投资"],
+["maintain","v.","/meɪnˈteɪn/","维持"],
+["market","n.","/ˈmɑːrkɪt/","市场"],
+["opportunity","n.","/ˌɑːpərˈtuːnəti/","机会"],
+["potential","n./adj.","/pəˈtenʃəl/","潜力；潜在的"],
+["profit","n.","/ˈprɑːfɪt/","利润"],
+["resource","n.","/ˈriːsɔːrs/","资源"],
+["strategy","n.","/ˈstrætədʒi/","策略"],
+["supply","n./v.","/səˈplaɪ/","供应"],
+["target","n./v.","/ˈtɑːrɡɪt/","目标；瞄准"],
+["trend","n.","/trend/","趋势"],
+["value","n./v.","/ˈvæljuː/","价值"],
+["accurate","adj.","/ˈækjərət/","准确的"],
+["acquire","v.","/əˈkwaɪər/","获得"],
+["annual","adj.","/ˈænjuəl/","年度的"],
+["capacity","n.","/kəˈpæsəti/","能力；容量"],
+["competitive","adj.","/kəmˈpetətɪv/","有竞争力的"],
+["contribute","v.","/kənˈtrɪbjuːt/","贡献"],
+["crucial","adj.","/ˈkruːʃəl/","关键的"],
+["decline","v./n.","/dɪˈklaɪn/","下降；衰退"],
+["domestic","adj.","/dəˈmestɪk/","国内的"],
+["economic","adj.","/ˌiːkəˈnɑːmɪk/","经济的"],
+["factor","n.","/ˈfæktər/","因素"],
+["financial","adj.","/faɪˈnænʃəl/","金融的"],
+["fundamental","adj.","/ˌfʌndəˈmentəl/","基础的"],
+["global","adj.","/ˈɡloʊbəl/","全球的"],
+["growth","n.","/ɡroʊθ/","增长"],
+["industry","n.","/ˈɪndəstri/","行业"],
+["inflation","n.","/ɪnˈfleɪʃən/","通货膨胀"],
+["innovation","n.","/ˌɪnəˈveɪʃən/","创新"],
+["investment","n.","/ɪnˈvestmənt/","投资"],
+["measure","v./n.","/ˈmeʒər/","衡量；措施"],
+["occur","v.","/əˈkɜːr/","发生"],
+["policy","n.","/ˈpɑːləsi/","政策"],
+["principle","n.","/ˈprɪnsəpəl/","原则"],
+["process","n./v.","/ˈprɑːses/","过程"],
+["reduce","v.","/rɪˈduːs/","减少"],
+["relevant","adj.","/ˈreləvənt/","相关的"],
+["revenue","n.","/ˈrevənuː/","收入；营收"],
+["sector","n.","/ˈsektər/","部门；行业"],
+["significant","adj.","/sɪɡˈnɪfɪkənt/","重要的；显著的"],
+["stable","adj.","/ˈsteɪbəl/","稳定的"],
+["sustainable","adj.","/səˈsteɪnəbəl/","可持续的"],
+["transform","v.","/trænsˈfɔːrm/","转变"],
+["uncertain","adj.","/ʌnˈsɜːrtən/","不确定的"],
+["vary","v.","/ˈveri/","变化"],
+["wealth","n.","/welθ/","财富"],
+["withdraw","v.","/wɪðˈdrɔː/","撤回"],
+["behavior","n.","/bɪˈheɪvjər/","行为"],
+["consumer","n.","/kənˈsuːmər/","消费者"],
+["cost","n.","/kɔːst/","成本"],
+["customer","n.","/ˈkʌstəmər/","顾客"],
+["brand","n.","/brænd/","品牌"],
+["channel","n.","/ˈtʃænəl/","渠道"],
+["conversion","n.","/kənˈvɜːrʒən/","转化"],
+["retention","n.","/rɪˈtenʃən/","留存"],
+["feedback","n.","/ˈfiːdbæk/","反馈"],
+["validate","v.","/ˈvælɪdeɪt/","验证"],
+["iterate","v.","/ˈɪtəreɪt/","迭代"],
+["prototype","n.","/ˈproʊtətaɪp/","原型"],
+["monetize","v.","/ˈmɑːnətaɪz/","变现"],
+["scale","v./n.","/skeɪl/","扩大；规模"],
+["margin","n.","/ˈmɑːrdʒɪn/","利润率；边际"],
+["transaction","n.","/trænˈzækʃən/","交易"],
+["platform","n.","/ˈplætfɔːrm/","平台"],
+["competitor","n.","/kəmˈpetɪtər/","竞争者"],
+["loyalty","n.","/ˈlɔɪəlti/","忠诚度"],
+["insight","n.","/ˈɪnsaɪt/","洞察"],
+["friction","n.","/ˈfrɪkʃən/","阻力；摩擦"],
+["urgency","n.","/ˈɜːrdʒənsi/","紧迫性"],
+["reliable","adj.","/rɪˈlaɪəbəl/","可靠的"],
+["practical","adj.","/ˈpræktɪkəl/","实际的"],
+["priority","n.","/praɪˈɔːrəti/","优先事项"]
+
+];
 
 
-/* =========================
-   基础数据
-========================= */
+/* =========================================================
+   商业问题
+========================================================= */
 
-const businessQuestions = [
+const businessQuestions=[
 
-{
-q:"一家健身房为什么会同时卖月卡、私教课和储值卡？这三种产品分别解决什么问题？",
-a:"月卡解决长期使用权；私教解决专业指导与结果需求；储值卡提高现金流和复购。真正需要观察的是：顾客为什么最终选择某一种，而不是只看价格。"
-},
+[
+"一家健身房已经有很多会员，但续费率很低。你会先调查什么？为什么？",
+"不要直接假设“教练不好”或“价格太贵”。应该先拆解会员流失节点，例如训练效果、使用频率、服务体验、价格、距离、课程价值感等，再用真实数据验证。"
+],
 
-{
-q:"如果一个健身新手不知道每天练什么，你认为他真正购买的可能是什么？",
-a:"表面上购买的是训练计划，但更深层可能购买的是确定感、降低犯错成本和持续反馈。"
-},
+[
+"一家餐馆每天客流不少，但利润很低。可能有哪些原因？",
+"营业额高不代表利润高。要拆解客单价、食材成本、人工、房租、平台抽成、折扣、损耗等。关键是找到利润漏点，而不是只看客流。"
+],
 
-{
-q:"一家餐厅不断发团购券，看起来降低了客单价，它为什么仍然愿意这样做？",
-a:"团购券可能承担获客、提高到店率、提高平台排名、制造首次消费的作用。低价产品不一定等于低利润，关键要看后续转化。"
-},
+[
+"一个产品很多人点赞，却几乎没人付费。你认为最应该验证什么？",
+"点赞代表兴趣，不等于购买意愿。应该验证用户是否存在足够强的痛点，以及愿意为什么结果付多少钱。"
+],
 
-{
-q:"如果一个免费软件要求用户每天签到才能获得一次核心服务，它真正想培养的是什么？",
-a:"核心不是签到本身，而是使用习惯。每天签到意味着用户持续回来，从而增加后续付费、广告或其他转化机会。"
-},
+[
+"为什么有些低价产品反而更难赚钱？",
+"价格低可能意味着利润空间小，需要更大的销量才能覆盖固定成本；同时低价用户可能带来更高服务成本。关键要看单位经济模型。"
+],
 
-{
-q:"为什么很多商家会模仿竞争对手已经验证过的产品？",
-a:"因为模仿降低了试错成本。但完全模仿会进入同质化竞争，所以真正有价值的是找到对方解决需求的底层逻辑，再寻找新的切入点。"
-},
+[
+"如果你发现一个行业所有商家都在做同一件事，你会怎么判断这是机会还是红海？",
+"不能因为大家都做就认定没有机会。要看需求是否增长、竞争强度、利润结构、用户未满足需求以及是否存在新的渠道或技术改变成本。"
+],
 
-{
-q:"如果一个直播间观看人数很多，但几乎没有成交，你会优先观察什么？",
-a:"应该观察流量来源、用户画像、产品价格、信任建立、购买理由和成交路径，而不是简单认为‘流量不够’。"
-},
+[
+"一个短视频有100万播放但只带来10个客户，这说明了什么？",
+"流量和转化是两个不同环节。可能内容吸引的人群与目标客户不匹配，也可能产品承接、价格、信任或购买路径存在问题。"
+],
 
-{
-q:"快递员为什么可能愿意在某个平台工作更长时间？除了工资，还有哪些激励？",
-a:"路线熟悉度、订单密度、奖励机制、时间自由度、提现速度、工作强度和未来收入预期都会影响选择。"
-},
+[
+"为什么有些商家宁愿做会员储值，也不愿意单纯提高单次消费价格？",
+"储值能够提前获得现金流，并提高复购概率和用户锁定程度。但同时也增加履约和退款风险，因此需要结合现金流与实际复购分析。"
+],
 
-{
-q:"如果一家店把储值卡卖得很好，它最大的商业价值是什么？",
-a:"除了提前获得现金，还可能形成消费锁定、提高复购率，并降低用户以后选择竞争对手的概率。"
-},
+[
+"如果你发现一个用户需求，但用户自己从来没有主动提出过，你会怎么验证？",
+"观察实际行为比询问更可靠。可以观察用户是否已经用其他方式解决这个问题，再用低成本原型验证用户是否愿意使用甚至付费。"
+],
 
-{
-q:"为什么一个已经赚钱的商业模式仍然可能突然失效？",
-a:"因为规则、技术、用户习惯、竞争环境或成本结构发生变化。商业模式不是永久有效的公式，而是特定环境下的结果。"
-},
+[
+"为什么“用户很多”不一定是好生意？",
+"用户规模只是一个变量，还要看获客成本、客单价、毛利、留存、服务成本和现金流。大量低价值用户可能反而拖累业务。"
+],
 
-{
-q:"如果你发现一个行业所有商家都在做同一件事，你会先问自己什么？",
-a:"先问‘为什么大家都这么做？’再问‘有没有被忽略的需求？’。不是为了反常而反常，而是寻找规则背后的原因。"
+[
+"一个产品第一批用户愿意免费使用，但不愿付2元，你会怎么看？",
+"说明价值感可能还没有达到付费阈值。下一步应该验证用户究竟认为价值不足，还是支付路径、信任等问题，而不是盲目扩大用户量。"
+],
+
+[
+"为什么很多创业者会不断增加功能，却不去验证核心需求？",
+"增加功能容易获得“正在进步”的心理反馈，但可能回避了真正困难的市场验证。核心应该先验证用户是否愿意持续使用和付费。"
+],
+
+[
+"如果一家店销量下降，你认为“降价促销”为什么不一定有效？",
+"降价只能解决价格敏感问题。如果销量下降来自需求变化、竞争、产品体验或客群变化，降价可能只是降低利润而没有解决原因。"
+]
+
+];
+
+
+/* =========================================================
+   经济问题
+========================================================= */
+
+const economyQuestions=[
+
+[
+"为什么通货膨胀会影响普通人的生活？",
+"物价整体上涨会降低货币购买力。如果收入增长低于物价增长，实际生活水平可能下降。"
+],
+
+[
+"为什么央行加息通常会影响股票市场？",
+"利率变化会影响融资成本、消费和投资，也会影响资产估值中的贴现率。但具体影响取决于市场预期和经济环境。"
+],
+
+[
+"GDP增长为什么不能直接等于普通人收入增长？",
+"GDP衡量经济生产活动，并不直接说明收入如何分配，也不代表所有群体收入同步增长。"
+],
+
+[
+"为什么一个国家出口下降可能影响国内就业？",
+"出口企业订单减少后，可能降低生产和招聘需求，并通过供应链影响相关企业。"
+],
+
+[
+"为什么经济衰退时企业通常会更加谨慎招聘？",
+"需求下降会降低企业对未来收入的预期，因此企业可能减少扩张和新增人员成本。"
+],
+
+[
+"为什么美元利率变化会影响全球资产？",
+"美元是重要国际货币，美国利率变化会影响美元资产收益率、资金流动和融资成本，从而影响其他国家的金融市场。"
+],
+
+[
+"为什么消费增加不一定代表经济长期健康？",
+"消费增长可能来自收入增加，也可能来自借贷或短期刺激。长期健康还需要生产率、就业、投资和收入预期等支撑。"
+],
+
+[
+"为什么失业率下降通常是经济的重要信号？",
+"就业改善通常意味着更多人获得收入并参与经济活动，但还需要结合工资、劳动参与率和就业质量判断。"
+],
+
+[
+"为什么房地产价格变化会影响其他行业？",
+"房地产与建筑、家居、金融等行业联系紧密，同时房产也是很多家庭的重要资产，因此财富效应也可能影响消费。"
+],
+
+[
+"为什么经济数据公布后，市场价格有时反而与直觉相反？",
+"市场交易的不只是当前数据，而是数据与此前预期之间的差异。如果结果好但低于市场预期，价格仍可能下跌。"
+],
+
+[
+"为什么人口结构会影响一个国家的经济？",
+"人口年龄结构会影响劳动力供给、消费需求、养老负担、储蓄和财政支出等。"
+],
+
+[
+"为什么生产率提高可能让一个国家长期变得更富？",
+"生产率提高意味着同样资源能够创造更多产品和服务，是长期经济增长的重要来源之一。"
+]
+
+];
+
+
+/* =========================================================
+   数据结构
+========================================================= */
+
+let db={};
+
+function blank(){
+
+  return {
+
+    action:"",
+    result:"",
+    body:"",
+    learnAnswer:"",
+    observation:"",
+    breakthrough:"",
+    tomorrow:"",
+
+    completed:[],
+
+    words:{},
+
+    bizReview:"",
+
+    weekReview:null
+
+  };
+
 }
 
-];
 
-
-const economyQuestions = [
-
-{
-q:"如果利率下降，为什么股票市场有时会受到影响？",
-a:"利率影响资金成本、资产估值和投资者对不同资产的选择。但股票上涨并不是降息的机械结果，还取决于经济增长、盈利预期等因素。"
-},
-
-{
-q:"如果工资不变，但生活成本持续上涨，普通人的实际购买力会发生什么？",
-a:"名义工资没有下降，但实际购买力会下降，因为相同的钱能购买的商品和服务减少了。"
-},
-
-{
-q:"GDP增长为什么不等于每个人收入都同比增长？",
-a:"GDP衡量的是一定时期内经济活动产生的最终产品和服务价值，并不直接描述收入在不同群体之间如何分配。"
-},
-
-{
-q:"为什么同一种商品在不同城市价格可能差很多？",
-a:"房租、人工、运输、供应链、竞争程度、消费能力以及当地供需都会影响最终价格。"
-},
-
-{
-q:"如果消费者普遍变得更加谨慎，餐饮行业可能出现什么变化？",
-a:"消费者可能减少高客单价消费、增加优惠敏感度，并更加重视性价比。商家的产品结构和促销方式也可能随之调整。"
-},
-
-{
-q:"出口增加一定意味着一个国家普通人的生活马上变好吗？",
-a:"不一定。出口增加可以带动生产和就业，但最终影响还取决于收入分配、进口成本、产业结构和居民消费等因素。"
-},
-
-{
-q:"为什么失业率上升可能影响餐饮消费？",
-a:"就业收入下降或收入预期恶化会降低部分家庭的可选消费，从而影响餐饮、娱乐等非必需消费。"
-},
-
-{
-q:"为什么一个城市的房租很高，附近餐厅价格也可能更高？",
-a:"房租是商家的固定成本之一。除此之外，人工、客流和商圈定位也会共同影响价格。"
-},
-
-{
-q:"如果大家都认为未来收入会下降，即使现在收入没有下降，会发生什么？",
-a:"预期本身可能改变行为。消费者可能增加储蓄、减少非必要消费，从而进一步影响市场需求。"
-},
-
-{
-q:"为什么‘便宜’不一定是消费者最终选择商品的唯一原因？",
-a:"消费者还会考虑质量、便利性、品牌、信任、体验、时间成本等。价格只是价值判断中的一个变量。"
-}
-
-];
-
-
-/* 英语词库 */
-
-const wordBank = [
-
-["abandon","v.","放弃；抛弃"],
-["ability","n.","能力"],
-["absolute","adj.","绝对的"],
-["absorb","v.","吸收"],
-["academic","adj.","学术的"],
-["access","n./v.","进入；使用权"],
-["accurate","adj.","准确的"],
-["achieve","v.","实现；达到"],
-["adapt","v.","适应；调整"],
-["adequate","adj.","足够的"],
-["advantage","n.","优势"],
-["alternative","n./adj.","替代方案；替代的"],
-["analyse","v.","分析"],
-["annual","adj.","每年的"],
-["anticipate","v.","预期"],
-["apparent","adj.","明显的"],
-["approach","n./v.","方法；接近"],
-["appropriate","adj.","合适的"],
-["assess","v.","评估"],
-["assume","v.","假设"],
-["attitude","n.","态度"],
-["benefit","n./v.","收益；受益"],
-["capacity","n.","能力；容量"],
-["challenge","n./v.","挑战"],
-["circumstance","n.","情况；环境"],
-["collapse","v./n.","崩溃"],
-["commodity","n.","商品"],
-["competitive","adj.","有竞争力的"],
-["concentrate","v.","集中"],
-["concept","n.","概念"],
-["consequence","n.","后果"],
-["consume","v.","消费"],
-["consumer","n.","消费者"],
-["contribute","v.","贡献"],
-["convert","v.","转化"],
-["crucial","adj.","关键的"],
-["decline","v./n.","下降；衰退"],
-["demand","n./v.","需求"],
-["demonstrate","v.","证明；展示"],
-["derive","v.","获得；源于"],
-["domestic","adj.","国内的"],
-["efficient","adj.","高效的"],
-["emerge","v.","出现"],
-["economic","adj.","经济的"],
-["economy","n.","经济"],
-["establish","v.","建立"],
-["evaluate","v.","评价；评估"],
-["evidence","n.","证据"],
-["expand","v.","扩大"],
-["expectation","n.","预期"],
-["factor","n.","因素"],
-["financial","adj.","金融的"],
-["flexible","adj.","灵活的"],
-["fundamental","adj.","基本的"],
-["generate","v.","产生"],
-["impact","n./v.","影响"],
-["income","n.","收入"],
-["increase","v./n.","增加"],
-["individual","n./adj.","个人；个人的"],
-["inflation","n.","通货膨胀"],
-["influence","n./v.","影响"],
-["investment","n.","投资"],
-["issue","n./v.","问题；发布"],
-["maintain","v.","维持"],
-["market","n.","市场"],
-["measure","n./v.","措施；衡量"],
-["motivate","v.","激励"],
-["negotiate","v.","协商"],
-["opportunity","n.","机会"],
-["outcome","n.","结果"],
-["participate","v.","参与"],
-["potential","n./adj.","潜力；潜在的"],
-["predict","v.","预测"],
-["pressure","n.","压力"],
-["principle","n.","原则"],
-["process","n./v.","过程；处理"],
-["profit","n./v.","利润；获利"],
-["purchase","n./v.","购买"],
-["relevant","adj.","相关的"],
-["require","v.","需要"],
-["resource","n.","资源"],
-["respond","v.","回应"],
-["revenue","n.","收入；营收"],
-["risk","n./v.","风险"],
-["strategy","n.","策略"],
-["structure","n.","结构"],
-["supply","n./v.","供应"],
-["sustainable","adj.","可持续的"],
-["trend","n.","趋势"],
-["valid","adj.","有效的"],
-["value","n./v.","价值；重视"],
-["variable","n./adj.","变量；可变的"],
-["welfare","n.","福利"],
-["withdraw","v.","撤回；提取"],
-["yield","n./v.","收益；产生"],
-["consumerism","n.","消费主义"],
-["entrepreneur","n.","企业家"],
-["logistics","n.","物流"],
-["productivity","n.","生产率"],
-["regulation","n.","监管；规定"],
-["transaction","n.","交易"],
-["reputation","n.","声誉"],
-["retention","n.","留存"],
-["subscription","n.","订阅"],
-["conversion","n.","转化"],
-["feedback","n.","反馈"],
-["iterate","v.","迭代"],
-["validation","n.","验证"],
-["monetize","v.","变现"],
-["demanding","adj.","要求高的"],
-["psychological","adj.","心理的"],
-["behavior","n.","行为"],
-["observation","n.","观察"],
-["experiment","n./v.","实验；试验"],
-["uncertainty","n.","不确定性"],
-["credibility","n.","可信度"],
-["consistency","n.","一致性；持续性"]
-
-];
-
-
-/* =========================
-   数据
-========================= */
+/* =========================================================
+   数据读取
+========================================================= */
 
 function loadDB(){
 
-  let raw = localStorage.getItem(STORAGE_KEY);
+  try{
 
-  if(raw){
-    try{
-      return JSON.parse(raw);
-    }catch(e){}
+    db=JSON.parse(
+      localStorage.getItem(DB_KEY)||"{}"
+    );
+
+  }catch(e){
+
+    db={};
+
   }
 
-  for(const key of oldKeys){
-    const old = localStorage.getItem(key);
+  /*
+    自动迁移旧版本。
+    v5.3 数据不会丢。
+  */
 
-    if(old){
+  if(!Object.keys(db).length){
+
+    for(const k of OLD_KEYS){
+
       try{
-        const parsed = JSON.parse(old);
 
-        return parsed;
+        const old=
+          JSON.parse(
+            localStorage.getItem(k)||"{}"
+          );
+
+        if(Object.keys(old).length){
+
+          db=old;
+
+          break;
+        }
+
       }catch(e){}
+
     }
+
   }
 
-  return {};
 }
 
+
+/* =========================================================
+   保存
+========================================================= */
 
 function saveDB(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(db));
+
+  localStorage.setItem(
+    DB_KEY,
+    JSON.stringify(db)
+  );
+
 }
 
 
-function getGrowthDate(date){
-
-  const d = new Date(date);
-
-  if(d.getHours() < 4){
-    d.setDate(d.getDate()-1);
-  }
-
-  return formatDate(d);
-}
-
-
-function formatDate(date){
-
-  const y = date.getFullYear();
-  const m = String(date.getMonth()+1).padStart(2,"0");
-  const d = String(date.getDate()).padStart(2,"0");
-
-  return `${y}-${m}-${d}`;
-}
-
-
-function parseDate(str){
-  const [y,m,d] = str.split("-").map(Number);
-  return new Date(y,m-1,d);
-}
-
-
-function addDays(str,n){
-
-  const d = parseDate(str);
-  d.setDate(d.getDate()+n);
-
-  return formatDate(d);
-}
-
-
-function current(){
-
-  if(!db[selectedDate]){
-
-    db[selectedDate] = {
-
-      keyAction:"",
-      actionResult:"",
-      body:"",
-      thinking:"",
-      discovery:"",
-      breakthrough:"",
-      tomorrow:"",
-      tasks:[],
-      words:{},
-      reviewWords:{}
-
-    };
-
-    saveDB();
-  }
-
-  return db[selectedDate];
-}
-
-
-/* =========================
+/* =========================================================
    日期
-========================= */
+========================================================= */
+
+function pad(n){
+
+  return String(n).padStart(2,"0");
+
+}
+
+function dateKey(d){
+
+  return d.getFullYear()
+    +"-"
+    +pad(d.getMonth()+1)
+    +"-"
+    +pad(d.getDate());
+
+}
+
+
+/*
+  04:00 才进入新成长日。
+*/
+
+function growthDate(){
+
+  const now=new Date();
+
+  if(now.getHours()<4){
+
+    now.setDate(
+      now.getDate()-1
+    );
+
+  }
+
+  return now;
+
+}
+
+let selectedDate=
+  dateKey(growthDate());
+
+
+function getDay(key){
+
+  if(!db[key]){
+
+    db[key]=blank();
+
+  }
+
+  const base=blank();
+
+  db[key]=Object.assign(
+    base,
+    db[key]
+  );
+
+  if(!Array.isArray(db[key].completed)){
+
+    db[key].completed=[];
+
+  }
+
+  if(!db[key].words){
+
+    db[key].words={};
+
+  }
+
+  return db[key];
+
+}
+
+
+function parseDate(key){
+
+  const [
+    y,
+    m,
+    d
+  ]=key.split("-").map(Number);
+
+  return new Date(
+    y,
+    m-1,
+    d
+  );
+
+}
+
+
+function addDays(key,n){
+
+  const d=parseDate(key);
+
+  d.setDate(
+    d.getDate()+n
+  );
+
+  return dateKey(d);
+
+}
+
+
+function formatDate(key){
+
+  const d=parseDate(key);
+
+  const week=[
+    "日",
+    "一",
+    "二",
+    "三",
+    "四",
+    "五",
+    "六"
+  ];
+
+  return `${
+    d.getMonth()+1
+  }月${
+    d.getDate()
+  }日 星期${
+    week[d.getDay()]
+  }`;
+
+}
+
+
+function indexOfDate(key){
+
+  const base=
+    new Date(2026,0,1);
+
+  const d=parseDate(key);
+
+  return Math.floor(
+    (d-base)/86400000
+  );
+
+}
+
+
+function isToday(key){
+
+  return key===dateKey(
+    growthDate()
+  );
+
+}
+
 
 function changeDate(n){
 
-  selectedDate = addDays(selectedDate,n);
+  selectedDate=
+    addDays(
+      selectedDate,
+      n
+    );
 
-  renderAll();
+  render();
+
 }
 
 
 function goToday(){
 
-  selectedDate = getGrowthDate(new Date());
+  selectedDate=
+    dateKey(
+      growthDate()
+    );
 
-  renderAll();
+  render();
+
 }
 
 
-/* =========================
-   保存
-========================= */
+/* =========================================================
+   保存当天
+========================================================= */
 
 function saveCurrent(){
 
-  const d = current();
+  const day=
+    getDay(selectedDate);
 
-  d.keyAction = document.getElementById("keyAction").value;
-  d.actionResult = document.getElementById("actionResult").value;
-  d.body = document.getElementById("body").value;
-  d.thinking = document.getElementById("thinking").value;
-  d.discovery = document.getElementById("discovery").value;
-  d.breakthrough = document.getElementById("breakthrough").value;
-  d.tomorrow = document.getElementById("tomorrow").value;
+  day.action=
+    document.getElementById(
+      "keyAction"
+    ).value.trim();
+
+  day.result=
+    document.getElementById(
+      "keyResult"
+    ).value.trim();
+
+  day.body=
+    document.getElementById(
+      "body"
+    ).value.trim();
+
+  day.learnAnswer=
+    document.getElementById(
+      "learnAnswer"
+    ).value.trim();
+
+  day.observation=
+    document.getElementById(
+      "observation"
+    ).value.trim();
+
+  day.breakthrough=
+    document.getElementById(
+      "breakthrough"
+    ).value.trim();
+
+  day.tomorrow=
+    document.getElementById(
+      "tomorrow"
+    ).value.trim();
 
   saveDB();
 
   renderScore();
+  renderRecent();
+  renderActionState();
+
+  alert("已保存");
+
 }
 
 
-/* =========================
-   任务
-========================= */
+/* =========================================================
+   完成事项
+========================================================= */
 
-function addCustomTask(){
+function addCustom(){
 
-  const input = document.getElementById("customTask");
+  const input=
+    document.getElementById(
+      "custom"
+    );
 
-  const value = input.value.trim();
+  const value=
+    input.value.trim();
 
-  if(!value) return;
+  if(!value)return;
 
-  current().tasks.push({
-    text:value,
-    done:true
-  });
+  const day=
+    getDay(selectedDate);
+
+  day.completed.push(value);
+
+  saveDB();
 
   input.value="";
 
-  saveDB();
-
-  renderTasks();
+  renderCompleted();
   renderScore();
+  renderRecent();
+
 }
 
 
-function toggleTask(index){
+function deleteCustom(index){
 
-  current().tasks[index].done =
-    !current().tasks[index].done;
+  const day=
+    getDay(selectedDate);
 
-  saveDB();
-
-  renderTasks();
-  renderScore();
-}
-
-
-function renderTasks(){
-
-  const box = document.getElementById("tasks");
-
-  const tasks = current().tasks;
-
-  if(!tasks.length){
-
-    box.innerHTML = `
-      <div class="muted">
-        暂时没有额外记录。完成一件真实事情后，可以把它写在这里。
-      </div>
-    `;
-
-    return;
-  }
-
-  box.innerHTML = tasks.map((t,i)=>`
-
-    <div class="task">
-
-      <input
-        type="checkbox"
-        ${t.done ? "checked":""}
-        onchange="toggleTask(${i})"
-      >
-
-      <div>
-        <div class="task-title">
-          ${escapeHtml(t.text)}
-        </div>
-      </div>
-
-    </div>
-
-  `).join("");
-}
-
-
-/* =========================
-   日期索引
-========================= */
-
-function dailyIndex(date){
-
-  const d = parseDate(date);
-
-  const start = new Date(2026,0,1);
-
-  const diff = Math.floor(
-    (d-start)/(1000*60*60*24)
+  day.completed.splice(
+    index,
+    1
   );
 
-  return Math.abs(diff);
+  saveDB();
+
+  renderCompleted();
+  renderScore();
+  renderRecent();
+
 }
 
 
-/* =========================
-   每日问题
-   真正一天一道
-========================= */
+/* =========================================================
+   深色模式
+========================================================= */
 
-function getDailyQuestion(){
+function toggleDark(){
 
-  const index = dailyIndex(selectedDate);
+  document.body.classList.toggle(
+    "dark"
+  );
 
-  const isBusiness = index % 2 === 0;
+  localStorage.setItem(
+    "life_dark",
+    document.body.classList.contains("dark")
+      ?"1"
+      :"0"
+  );
 
-  const list = isBusiness
-    ? businessQuestions
-    : economyQuestions;
+}
 
-  const item = list[
-    Math.floor(index/2) % list.length
-  ];
 
-  return {
-    type:isBusiness ? "商业观察" : "经济思考",
-    data:item
+/* =========================================================
+   商业 / 经济问题
+========================================================= */
+
+function questionFor(key){
+
+  const i=
+    Math.abs(
+      indexOfDate(key)
+    );
+
+  const business=
+    i%2===0;
+
+  const list=
+    business
+      ?businessQuestions
+      :economyQuestions;
+
+  return{
+
+    type:
+      business
+        ?"business"
+        :"economy",
+
+    data:
+      list[
+        Math.floor(i/2)%12
+      ]
+
   };
+
 }
 
+
+/* =========================================================
+   Header
+========================================================= */
+
+function renderHeader(){
+
+  document.getElementById(
+    "dateTitle"
+  ).textContent=
+    formatDate(
+      selectedDate
+    )
+    +
+    (
+      isToday(selectedDate)
+        ?" · 今天"
+        :""
+    );
+
+}
+
+
+/* =========================================================
+   输入
+========================================================= */
+
+function renderInputs(){
+
+  const day=
+    getDay(selectedDate);
+
+  document.getElementById(
+    "keyAction"
+  ).value=
+    day.action||"";
+
+  document.getElementById(
+    "keyResult"
+  ).value=
+    day.result||"";
+
+  document.getElementById(
+    "body"
+  ).value=
+    day.body||"";
+
+  document.getElementById(
+    "learnAnswer"
+  ).value=
+    day.learnAnswer||"";
+
+  document.getElementById(
+    "observation"
+  ).value=
+    day.observation||"";
+
+  document.getElementById(
+    "breakthrough"
+  ).value=
+    day.breakthrough||"";
+
+  document.getElementById(
+    "tomorrow"
+  ).value=
+    day.tomorrow||"";
+
+}
+
+
+/* =========================================================
+   行动状态
+========================================================= */
+
+function renderActionState(){
+
+  const day=
+    getDay(selectedDate);
+
+  const el=
+    document.getElementById(
+      "actionState"
+    );
+
+  if(
+    day.action &&
+    day.result
+  ){
+
+    el.textContent=
+      "已完成并留下结果";
+
+    el.style.color=
+      "var(--green)";
+
+  }else if(day.action){
+
+    el.textContent=
+      "已设定，但还缺结果";
+
+    el.style.color=
+      "var(--orange)";
+
+  }else{
+
+    el.textContent=
+      "尚未完成";
+
+    el.style.color=
+      "var(--red)";
+
+  }
+
+}
+
+
+/* =========================================================
+   问题
+========================================================= */
 
 function renderQuestion(){
 
-  const item = getDailyQuestion();
+  const q=
+    questionFor(
+      selectedDate
+    );
 
-  document.getElementById("questionType").textContent =
-    item.type;
+  document.getElementById(
+    "learnTitle"
+  ).textContent=
+    q.type==="business"
+      ?"③ 商业思考"
+      :"③ 经济思考";
 
-  document.getElementById("question").textContent =
-    item.data.q;
+  document.getElementById(
+    "questionMeta"
+  ).textContent=
+    q.type==="business"
+      ?"商业：需求 / 成本 / 用户 / 竞争 / 变现"
+      :"经济：增长 / 利率 / 通胀 / 就业 / 生产率";
 
-  document.getElementById("thinking").value =
-    current().thinking || "";
+  document.getElementById(
+    "question"
+  ).textContent=
+    q.data[0];
 
-  document.getElementById("reference").innerHTML =
-    item.data.a;
+  document.getElementById(
+    "reference"
+  ).textContent=
+    q.data[1];
+
+  document.getElementById(
+    "reference"
+  ).style.display=
+    "none";
+
+  const answer=
+    getDay(selectedDate)
+      .learnAnswer
+      .trim();
+
+  const btn=
+    document.getElementById(
+      "feedbackButton"
+    );
+
+  btn.style.display=
+    answer
+      ?"inline-block"
+      :"none";
+
+  document.getElementById(
+    "answerFeedback"
+  ).style.display=
+    "none";
+
 }
 
 
 function showReference(){
 
-  const ref = document.getElementById("reference");
+  const box=
+    document.getElementById(
+      "reference"
+    );
 
-  ref.style.display =
-    ref.style.display === "block"
-      ? "none"
-      : "block";
+  box.style.display=
+    box.style.display==="block"
+      ?"none"
+      :"block";
+
 }
 
 
-/* =========================
-   英语
-========================= */
+/*
+  这是规则型反馈，不是假装 AI。
+  系统根据回答结构给你反馈。
+*/
 
-function getTodayWords(date){
+function analyzeAnswer(){
 
-  const index = dailyIndex(date);
+  const answer=
+    document.getElementById(
+      "learnAnswer"
+    ).value.trim();
 
-  const start =
-    (index * 12) % wordBank.length;
+  const box=
+    document.getElementById(
+      "answerFeedback"
+    );
+
+  if(!answer){
+
+    box.innerHTML=
+      "你还没有回答。先回答，再谈分析。";
+
+    box.style.display=
+      "block";
+
+    return;
+
+  }
+
+  const signals={
+
+    evidence:
+      /(数据|证据|观察|事实|案例|实际|验证|调查|测试)/.test(answer),
+
+    user:
+      /(用户|顾客|消费者|会员|客户|需求|痛点)/.test(answer),
+
+    cost:
+      /(成本|价格|利润|收入|现金流|毛利|费用)/.test(answer),
+
+    cause:
+      /(因为|原因|导致|影响|所以|可能)/.test(answer),
+
+    action:
+      /(验证|调查|测试|尝试|观察|比较|拆解)/.test(answer)
+
+  };
+
+  const count=
+    Object.values(signals)
+      .filter(Boolean)
+      .length;
+
+  let html="";
+
+  if(count>=4){
+
+    html=
+      "<b>你的回答已经开始进入分析模式。</b><br>"+
+      "你同时考虑了证据、原因、用户/成本和验证动作。下一步不是继续增加观点，而是拿现实数据验证。";
+
+  }else if(count>=2){
+
+    html=
+      "<b>有分析框架，但还不够完整。</b><br>"+
+      "你已经不是单纯描述现象，但还可以继续追问：证据是什么？谁受影响？成本是什么？下一步怎么验证？";
+
+  }else{
+
+    html=
+      "<b>目前更接近直觉判断。</b><br>"+
+      "这不是坏事，但不要把直觉当结论。下一次尝试加入一个具体证据、一个因果关系，以及一个验证动作。";
+
+  }
+
+  box.innerHTML=
+    html;
+
+  box.style.display=
+    "block";
+
+}
+
+
+/* =========================================================
+   完成事项
+========================================================= */
+
+function renderCompleted(){
+
+  const list=
+    document.getElementById(
+      "completedList"
+    );
+
+  const day=
+    getDay(selectedDate);
+
+  if(!day.completed.length){
+
+    list.innerHTML=
+      '<div class="empty">今天还没有记录完成事项。</div>';
+
+    return;
+
+  }
+
+  list.innerHTML=
+    day.completed.map(
+      (x,i)=>`
+
+      <div class="completed completed-row">
+
+        <span>
+          ✓ ${escapeHtml(x)}
+        </span>
+
+        <button
+          class="danger small"
+          onclick="deleteCustom(${i})">
+          删除
+        </button>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   HTML 安全
+========================================================= */
+
+function escapeHtml(str){
+
+  return String(str)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   英语词汇
+========================================================= */
+
+function todayWords(key){
+
+  const start=
+    Math.abs(
+      indexOfDate(key)
+    )*12;
 
   const result=[];
 
-  for(let i=0;i<12;i++){
+  for(
+    let i=0;
+    i<12;
+    i++
+  ){
 
     result.push(
-      wordBank[(start+i)%wordBank.length]
+      vocab[
+        (start+i)%vocab.length
+      ]
     );
 
   }
 
   return result;
+
 }
 
 
-/* 获取词典数据 */
+function setWordState(
+  key,
+  index,
+  state
+){
 
-async function fetchDictionary(word){
+  const day=
+    getDay(key);
 
-  try{
-
-    const response =
-      await fetch(
-        "https://api.dictionaryapi.dev/api/v2/entries/en/" +
-        encodeURIComponent(word)
-      );
-
-    if(!response.ok){
-      return null;
-    }
-
-    const data = await response.json();
-
-    if(!Array.isArray(data) || !data.length){
-      return null;
-    }
-
-    const entry = data[0];
-
-    let ipa = "";
-
-    let audio = "";
+  if(state){
 
     /*
-      优先寻找带 audio 的 phonetic。
-      Dictionary API 的音频通常来自其词典音频源。
+      再点击一次同一个状态
+      =取消标记
     */
 
-    if(Array.isArray(entry.phonetics)){
+    if(
+      day.words[index]===state
+    ){
 
-      const withAudio =
-        entry.phonetics.find(
-          p => p.audio && p.audio.length > 0
-        );
+      delete day.words[index];
 
-      const phonetic =
-        entry.phonetics.find(
-          p => p.text && p.text.length > 0
-        );
+    }else{
 
-      if(phonetic){
-        ipa = phonetic.text;
-      }
-
-      if(withAudio){
-        audio = withAudio.audio;
-      }
+      day.words[index]=state;
 
     }
 
-    /*
-      如果第一个 entry 没找到，再遍历其它 entry。
-    */
-
-    if((!ipa || !audio) && data.length>1){
-
-      for(const e of data){
-
-        if(!Array.isArray(e.phonetics)) continue;
-
-        if(!ipa){
-
-          const p =
-            e.phonetics.find(
-              x => x.text && x.text.length>0
-            );
-
-          if(p) ipa=p.text;
-
-        }
-
-        if(!audio){
-
-          const p =
-            e.phonetics.find(
-              x => x.audio && x.audio.length>0
-            );
-
-          if(p) audio=p.audio;
-
-        }
-
-      }
-
-    }
-
-    return {
-      ipa,
-      audio
-    };
-
-  }catch(error){
-
-    console.log(
-      "Dictionary API error:",
-      word,
-      error
-    );
-
-    return null;
   }
-}
-
-
-/* 音频缓存 */
-
-const audioCache={};
-
-
-async function playWord(word,speed=1){
-
-  let info = audioCache[word];
-
-  if(info === undefined){
-
-    info = await fetchDictionary(word);
-
-    audioCache[word] = info || null;
-  }
-
-  if(!info || !info.audio){
-
-    alert(
-      "这个单词暂时没有找到可用的词典音频。\n\n" +
-      "可以继续学习，不影响打卡。"
-    );
-
-    return;
-  }
-
-  const audio = new Audio(info.audio);
-
-  audio.playbackRate = speed;
-
-  audio.volume = 1;
-
-  try{
-    await audio.play();
-  }catch(error){
-
-    alert(
-      "音频播放失败，请确认手机当前允许网页播放声音。"
-    );
-
-  }
-
-}
-
-
-function getWordInfo(word){
-
-  return current().wordInfo?.[word] || null;
-}
-
-
-function ensureWordInfo(word){
-
-  const d=current();
-
-  if(!d.wordInfo){
-    d.wordInfo={};
-  }
-
-  if(!d.wordInfo[word]){
-    d.wordInfo[word]={
-      ipa:"",
-      audio:"",
-      loaded:false
-    };
-  }
-
-  return d.wordInfo[word];
-}
-
-
-async function loadWordInfo(word){
-
-  const d=current();
-
-  const info=ensureWordInfo(word);
-
-  if(info.loaded){
-    return info;
-  }
-
-  const data =
-    await fetchDictionary(word);
-
-  if(data){
-
-    info.ipa=data.ipa || "";
-
-    info.audio=data.audio || "";
-
-  }
-
-  info.loaded=true;
 
   saveDB();
 
-  return info;
-}
-
-
-/* =========================
-   掌握程度
-========================= */
-
-function setMastery(word,state){
-
-  const d=current();
-
-  if(!d.words){
-    d.words={};
-  }
-
-  d.words[word]=state;
-
-  saveDB();
-
-  renderEnglish();
+  renderWords();
   renderScore();
-}
-
-
-/* =========================
-   英语卡片
-========================= */
-
-function renderEnglish(){
-
-  const d=current();
-
-  const words =
-    getTodayWords(selectedDate);
-
-  const box =
-    document.getElementById("words");
-
-  box.innerHTML = words.map(item=>{
-
-    const word=item[0];
-
-    const pos=item[1];
-
-    const meaning=item[2];
-
-    const state=d.words?.[word] || "";
-
-    const info=getWordInfo(word);
-
-    const ipa=
-      info?.ipa || "加载音标中…";
-
-    return `
-
-      <div class="word">
-
-        <div class="word-main">
-
-          <div>
-            <span class="word-name">
-              ${word}
-            </span>
-
-            <span class="word-pos">
-              ${pos}
-            </span>
-          </div>
-
-        </div>
-
-        <div class="word-ipa">
-          ${escapeHtml(ipa)}
-        </div>
-
-        <div class="word-meaning">
-          ${meaning}
-        </div>
-
-        <div class="audio-buttons">
-
-          <button
-            onclick="playWord('${word.replace(/'/g,"\\'")}',1)"
-          >
-            🔊 正常
-          </button>
-
-          <button
-            onclick="playWord('${word.replace(/'/g,"\\'")}',0.7)"
-          >
-            🐢 0.7×
-          </button>
-
-        </div>
-
-        <div class="mastery">
-
-          <button
-            class="${state==="know"?"active":""}"
-            onclick="setMastery('${word}','know')"
-          >
-            ✓ 会
-          </button>
-
-          <button
-            class="${state==="fuzzy"?"active":""}"
-            onclick="setMastery('${word}','fuzzy')"
-          >
-            ~ 模糊
-          </button>
-
-          <button
-            class="${state==="unknown"?"active":""}"
-            onclick="setMastery('${word}','unknown')"
-          >
-            × 不会
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
-
-  /*
-    异步加载 IPA。
-  */
-
-  words.forEach(async item=>{
-
-    const word=item[0];
-
-    await loadWordInfo(word);
-
-    renderEnglishAfterLoad();
-
-  });
-
-  updateEnglishStatus();
-}
-
-
-function renderEnglishAfterLoad(){
-
-  const words =
-    getTodayWords(selectedDate);
-
-  const d=current();
-
-  const box=document.getElementById("words");
-
-  /*
-    如果用户已经切换日期，不再刷新错误日期。
-  */
-
-  box.innerHTML=words.map(item=>{
-
-    const word=item[0];
-
-    const pos=item[1];
-
-    const meaning=item[2];
-
-    const state=d.words?.[word] || "";
-
-    const info=d.wordInfo?.[word];
-
-    const ipa=
-      info?.ipa || "暂无音标";
-
-    return `
-
-      <div class="word">
-
-        <div class="word-main">
-
-          <div>
-            <span class="word-name">
-              ${word}
-            </span>
-
-            <span class="word-pos">
-              ${pos}
-            </span>
-          </div>
-
-        </div>
-
-        <div class="word-ipa">
-          ${escapeHtml(ipa)}
-        </div>
-
-        <div class="word-meaning">
-          ${meaning}
-        </div>
-
-        <div class="audio-buttons">
-
-          <button onclick="playWord('${word}',1)">
-            🔊 正常
-          </button>
-
-          <button onclick="playWord('${word}',0.7)">
-            🐢 0.7×
-          </button>
-
-        </div>
-
-        <div class="mastery">
-
-          <button
-            class="${state==="know"?"active":""}"
-            onclick="setMastery('${word}','know')"
-          >
-            ✓ 会
-          </button>
-
-          <button
-            class="${state==="fuzzy"?"active":""}"
-            onclick="setMastery('${word}','fuzzy')"
-          >
-            ~ 模糊
-          </button>
-
-          <button
-            class="${state==="unknown"?"active":""}"
-            onclick="setMastery('${word}','unknown')"
-          >
-            × 不会
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
-
-  updateEnglishStatus();
-}
-
-
-function updateEnglishStatus(){
-
-  const d=current();
-
-  const words =
-    getTodayWords(selectedDate);
-
-  const completed =
-    words.filter(
-      x => d.words?.[x[0]]
-    ).length;
-
-  document.getElementById("englishStatus").textContent =
-    `今日已学习 ${completed} / ${words.length} 个单词`;
+  renderRecent();
 
 }
 
 
-/* =========================
-   昨日复习
-========================= */
+function renderWords(){
 
-function renderReview(){
+  const list=
+    document.getElementById(
+      "wordList"
+    );
 
-  const previousDate =
-    addDays(selectedDate,-1);
+  const day=
+    getDay(selectedDate);
 
-  const previous =
-    db[previousDate];
+  const words=
+    todayWords(
+      selectedDate
+    );
 
-  const box =
-    document.getElementById("reviewWords");
+  list.innerHTML=
+    words.map(
+      (w,i)=>{
 
-  if(!previous){
+        const state=
+          day.words[i]||"";
 
-    box.innerHTML =
-      `<div class="muted">
-        昨天还没有英语学习记录。
-      </div>`;
+        return `
 
-    return;
-  }
+        <div class="word">
 
-  const words =
-    getTodayWords(previousDate);
+          <div class="word-main">
 
-  if(!previous.reviewWords){
-    previous.reviewWords={};
-  }
+            <b>${w[0]}</b>
 
-  box.innerHTML = `
-
-    <div class="notice">
-      昨日：${previousDate}
-    </div>
-
-    ${words.map(item=>{
-
-      const word=item[0];
-
-      const state =
-        previous.reviewWords[word] || "";
-
-      return `
-
-        <div class="review-word">
-
-          <div>
-            <strong style="font-size:18px">
-              ${word}
-            </strong>
-
-            <span class="muted">
-              ${item[2]}
-            </span>
-          </div>
-
-          <div class="audio-buttons">
-
-            <button onclick="playReview('${word}',1)">
-              🔊 听
-            </button>
-
-            <button onclick="playReview('${word}',0.7)">
-              🐢 慢速
-            </button>
+            <small>
+              ${w[1]} · ${w[2]} · ${w[3]}
+            </small>
 
           </div>
 
-          <div class="mastery">
+          <div class="word-buttons">
 
             <button
-              class="${state==="remember"?"active":""}"
-              onclick="setReview('${word}','remember')"
-            >
-              ✓ 记住
+              class="known ${
+                state==="known"
+                  ?"active"
+                  :""
+              }"
+              onclick="
+                setWordState(
+                  '${selectedDate}',
+                  ${i},
+                  'known'
+                )
+              ">
+              会
             </button>
 
             <button
-              class="${state==="fuzzy"?"active":""}"
-              onclick="setReview('${word}','fuzzy')"
-            >
-              ~ 模糊
+              class="fuzzy ${
+                state==="fuzzy"
+                  ?"active"
+                  :""
+              }"
+              onclick="
+                setWordState(
+                  '${selectedDate}',
+                  ${i},
+                  'fuzzy'
+                )
+              ">
+              模糊
             </button>
 
             <button
-              class="${state==="forget"?"active":""}"
-              onclick="setReview('${word}','forget')"
-            >
-              × 忘了
+              class="unknown ${
+                state==="unknown"
+                  ?"active"
+                  :""
+              }"
+              onclick="
+                setWordState(
+                  '${selectedDate}',
+                  ${i},
+                  'unknown'
+                )
+              ">
+              不会
             </button>
 
           </div>
 
         </div>
 
-      `;
+        `;
 
-    }).join("")}
-
-  `;
-
-}
-
-
-function setReview(word,state){
-
-  const previousDate =
-    addDays(selectedDate,-1);
-
-  if(!db[previousDate]){
-    return;
-  }
-
-  if(!db[previousDate].reviewWords){
-    db[previousDate].reviewWords={};
-  }
-
-  db[previousDate].reviewWords[word]=state;
-
-  saveDB();
-
-  renderReview();
-}
-
-
-function playReview(word,speed){
-
-  playWordFromDate(
-    word,
-    addDays(selectedDate,-1),
-    speed
-  );
-
-}
-
-
-async function playWordFromDate(word,date,speed){
-
-  let info =
-    db[date]?.wordInfo?.[word];
-
-  if(!info || !info.audio){
-
-    const data =
-      await fetchDictionary(word);
-
-    if(data){
-
-      if(!db[date].wordInfo){
-        db[date].wordInfo={};
       }
-
-      db[date].wordInfo[word]={
-        ipa:data.ipa || "",
-        audio:data.audio || "",
-        loaded:true
-      };
-
-      saveDB();
-
-      info=db[date].wordInfo[word];
-
-    }
-
-  }
-
-  if(!info || !info.audio){
-
-    alert(
-      "这个单词暂时没有找到可用的词典音频。"
-    );
-
-    return;
-  }
-
-  const audio =
-    new Audio(info.audio);
-
-  audio.playbackRate=speed;
-
-  try{
-    await audio.play();
-  }catch(e){
-
-    alert(
-      "音频播放失败，请检查手机声音或网页播放权限。"
-    );
-
-  }
+    ).join("");
 
 }
 
 
-/* =========================
-   成长评分
-========================= */
+/* =========================================================
+   评分
+========================================================= */
 
-function calculateScore(date){
+/*
+  v5.4：
 
-  const d=db[date] || {};
+  行动       30
+  身体       15
+  英语       15
+  商业/经济  15
+  观察       10
+  突破       15
 
-  let action=0;
-  let body=0;
-  let english=0;
-  let learn=0;
-  let observe=0;
+  核心原则：
 
-  /*
-    行动 30
-  */
+  如果没有“行动 + 结果”
+  当天最高只能30分。
 
-  if(
-    d.keyAction &&
-    d.keyAction.trim().length>=5 &&
-    d.actionResult &&
-    d.actionResult.trim().length>=5
-  ){
-    action=30;
-  }
+  这样防止：
+  学很多、写很多、想很多
+  但现实中什么都没发生。
+*/
 
-  /*
-    身体 15
-  */
+function scoreFor(key){
 
-  if(
-    d.body &&
-    d.body.trim().length>=8
-  ){
-    body=15;
-  }
+  const d=
+    getDay(key);
 
-  /*
-    英语 15
-  */
+  const action=
+    (
+      d.action.trim() &&
+      d.result.trim()
+    )
+      ?30
+      :0;
 
-  const words =
-    getTodayWords(date);
+  const body=
+    d.body.trim()
+      ?15
+      :0;
 
-  const englishStates =
-    words.filter(
-      x=>d.words?.[x[0]]
+  const marked=
+    Object.keys(
+      d.words||{}
     ).length;
 
-  if(englishStates>=6){
-    english=15;
-  }
+  const english=
+    Math.min(
+      15,
+      Math.floor(
+        marked/12*15
+      )
+    );
 
-  /*
-    商业/经济思考 20
-  */
+  const answer=
+    d.learnAnswer.trim();
 
-  if(
-    d.thinking &&
-    d.thinking.trim().length>=15
-  ){
-    learn=20;
-  }
+  const learn=
+    answer.length>=15
+      ?15
+      :answer.length>=5
+        ?8
+        :0;
 
-  /*
-    观察 10
-  */
+  const observe=
+    d.observation.trim()
+      ?10
+      :0;
 
-  if(
-    d.discovery &&
-    d.discovery.trim().length>=8
-  ){
-    observe+=10;
-  }
+  const breakthrough=
+    d.breakthrough.trim()
+      ?15
+      :0;
 
-  /*
-    突破 10
-  */
-
-  if(
-    d.breakthrough &&
-    d.breakthrough.trim().length>=8
-  ){
-    observe+=10;
-  }
-
-  let total =
+  let total=
     action+
     body+
     english+
     learn+
-    observe;
+    observe+
+    breakthrough;
 
-  /*
-    如果没有真正行动，最高30。
-  */
+  if(action===0){
 
-  const hasRealAction =
-    d.keyAction &&
-    d.keyAction.trim().length>=5 &&
-    d.actionResult &&
-    d.actionResult.trim().length>=5;
+    total=
+      Math.min(
+        30,
+        total
+      );
 
-  if(!hasRealAction){
-    total=Math.min(total,30);
   }
 
-  return {
-    total,
+  return{
+
     action,
     body,
     english,
     learn,
-    observe
+    observe,
+    breakthrough,
+    total
+
   };
 
 }
@@ -1991,63 +2316,247 @@ function calculateScore(date){
 
 function renderScore(){
 
-  const s =
-    calculateScore(selectedDate);
+  const s=
+    scoreFor(
+      selectedDate
+    );
 
-  document.getElementById("score").textContent =
-    s.total;
-
-  document.getElementById("progress").style.width =
-    s.total+"%";
-
-  document.getElementById("sAction").textContent =
+  document.getElementById(
+    "sAction"
+  ).textContent=
     s.action;
 
-  document.getElementById("sBody").textContent =
+  document.getElementById(
+    "sBody"
+  ).textContent=
     s.body;
 
-  document.getElementById("sEnglish").textContent =
+  document.getElementById(
+    "sEnglish"
+  ).textContent=
     s.english;
 
-  document.getElementById("sLearn").textContent =
+  document.getElementById(
+    "sLearn"
+  ).textContent=
     s.learn;
 
-  document.getElementById("sObserve").textContent =
+  document.getElementById(
+    "sObserve"
+  ).textContent=
     s.observe;
+
+  document.getElementById(
+    "sBreak"
+  ).textContent=
+    s.breakthrough;
+
+  document.getElementById(
+    "scoreBar"
+  ).style.width=
+    s.total+"%";
+
+
+  const msg=
+    document.getElementById(
+      "scoreMessage"
+    );
+
+  if(s.action===0){
+
+    msg.innerHTML=
+      "⚠️ 今天还没有形成“行动 → 结果”闭环。"+
+      "其他记录再多，也不能替代现实行动。";
+
+  }else if(s.total<60){
+
+    msg.innerHTML=
+      "今天已经进入现实，但还有明显空缺。"+
+      "不要补分，继续行动。";
+
+  }else if(s.total<85){
+
+    msg.innerHTML=
+      "今天留下了比较完整的反馈。"+
+      "继续保持，不需要追求满分。";
+
+  }else{
+
+    msg.innerHTML=
+      "今天的记录比较完整。"+
+      "真正值得关注的是：这些行动有没有产生长期结果？";
+
+  }
+
 }
 
 
-/* =========================
-   七日记录
-========================= */
+/* =========================================================
+   昨日复盘
+========================================================= */
 
-function renderWeek(){
+function renderYesterday(){
 
   const box=
-    document.getElementById("week");
+    document.getElementById(
+      "yesterdayContent"
+    );
+
+  if(
+    !isToday(selectedDate)
+  ){
+
+    box.innerHTML=
+      '<div class="empty">'+
+      '切换到今天时，这里显示上一成长日的复盘。'+
+      '</div>';
+
+    return;
+
+  }
+
+  const yesterday=
+    addDays(
+      selectedDate,
+      -1
+    );
+
+  const prev=
+    getDay(yesterday);
+
+  const q=
+    questionFor(yesterday);
+
+  const words=
+    todayWords(yesterday);
 
   let html="";
 
-  for(let i=6;i>=0;i--){
+  if(
+    !prev.learnAnswer.trim() &&
+    !Object.keys(
+      prev.words||{}
+    ).length
+  ){
 
-    const date=
-      addDays(selectedDate,-i);
+    html+=
+      '<div class="empty">'+
+      '昨天还没有留下可复盘的学习记录。'+
+      '</div>';
 
-    const s=
-      calculateScore(date);
+  }else{
 
     html+=`
 
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        padding:8px 0;
-        border-bottom:1px solid #edf0f5;
-      ">
+      <div class="review-box">
 
-        <span>${date}</span>
+        <b>
+          昨日 ${
+            q.type==="business"
+              ?"商业"
+              :"经济"
+          }回答
+        </b>
 
-        <strong>${s.total}/100</strong>
+        <div>
+          ${
+            escapeHtml(
+              prev.learnAnswer||
+              "未回答"
+            )
+          }
+        </div>
+
+      </div>
+
+      <div class="review-box">
+
+        <b>参考分析</b>
+
+        <div>
+          ${
+            escapeHtml(
+              q.data[1]
+            )
+          }
+        </div>
+
+      </div>
+
+      <textarea
+        id="bizReview"
+        placeholder="看完参考分析后，你原来的回答漏掉了什么？今天重新想一遍。">${
+          escapeHtml(
+            prev.bizReview||""
+          )
+        }</textarea>
+
+      <div style="height:8px"></div>
+
+      <button
+        onclick="saveYesterdayReview()">
+        保存昨日复盘
+      </button>
+
+    `;
+
+  }
+
+
+  html+=`
+    <div style="margin-top:15px">
+      <b>昨日英语复习</b>
+    </div>
+  `;
+
+
+  for(
+    let i=0;
+    i<words.length;
+    i++
+  ){
+
+    const state=
+      prev.words[i]||"";
+
+    html+=`
+
+      <div class="word">
+
+        <div class="word-main">
+
+          <b>
+            ${words[i][0]}
+          </b>
+
+          <small>
+            ${words[i][2]}
+            ·
+            ${words[i][3]}
+          </small>
+
+        </div>
+
+        <div>
+
+          <span class="tag">
+
+            ${
+              state==="known"
+                ?"昨天：会"
+                :
+              state==="fuzzy"
+                ?"昨天：模糊"
+                :
+              state==="unknown"
+                ?"昨天：不会"
+                :
+              "昨天：未标记"
+            }
+
+          </span>
+
+        </div>
 
       </div>
 
@@ -2055,108 +2564,854 @@ function renderWeek(){
 
   }
 
-  box.innerHTML=html;
-}
-
-
-/* =========================
-   页面填充
-========================= */
-
-function fillForm(){
-
-  const d=current();
-
-  document.getElementById("keyAction").value =
-    d.keyAction || "";
-
-  document.getElementById("actionResult").value =
-    d.actionResult || "";
-
-  document.getElementById("body").value =
-    d.body || "";
-
-  document.getElementById("thinking").value =
-    d.thinking || "";
-
-  document.getElementById("discovery").value =
-    d.discovery || "";
-
-  document.getElementById("breakthrough").value =
-    d.breakthrough || "";
-
-  document.getElementById("tomorrow").value =
-    d.tomorrow || "";
+  box.innerHTML=
+    html;
 
 }
 
 
-function renderAll(){
+function saveYesterdayReview(){
 
-  document.getElementById("dateText").textContent =
-    selectedDate;
+  const yesterday=
+    addDays(
+      selectedDate,
+      -1
+    );
 
-  current();
+  const prev=
+    getDay(yesterday);
 
-  fillForm();
+  const value=
+    document.getElementById(
+      "bizReview"
+    ).value.trim();
 
-  renderTasks();
+  prev.bizReview=
+    value;
 
-  renderQuestion();
+  saveDB();
 
-  renderEnglish();
+  renderYesterday();
 
-  renderReview();
-
-  renderScore();
-
-  renderWeek();
-
-}
-
-
-/* =========================
-   深色模式
-========================= */
-
-function toggleDark(){
-
-  document.body.classList.toggle("dark");
-
-  localStorage.setItem(
-    "life_dark",
-    document.body.classList.contains("dark")
+  alert(
+    "昨日复盘已保存"
   );
 
 }
 
 
-if(localStorage.getItem("life_dark")==="true"){
-  document.body.classList.add("dark");
+/* =========================================================
+   最近7天
+========================================================= */
+
+function renderRecent(){
+
+  const box=
+    document.getElementById(
+      "recent7"
+    );
+
+  let html="";
+
+  for(
+    let i=6;
+    i>=0;
+    i--
+  ){
+
+    const key=
+      addDays(
+        selectedDate,
+        -i
+      );
+
+    const s=
+      scoreFor(key);
+
+    const d=
+      getDay(key);
+
+    let cls=
+      "score-low";
+
+    if(s.total>=70){
+
+      cls=
+        "score-high";
+
+    }else if(s.total>=40){
+
+      cls=
+        "score-mid";
+
+    }
+
+    const actionText=
+      d.action&&d.result
+        ?"✓ 有现实结果"
+        :
+      d.action
+        ?"△ 有行动，缺结果"
+        :
+      "— 无核心行动";
+
+    html+=`
+
+      <div class="day-row">
+
+        <div class="day-main">
+
+          <span>
+            ${formatDate(key)}
+          </span>
+
+          <b class="${cls}">
+            ${s.total} 分
+          </b>
+
+        </div>
+
+        <div class="day-sub">
+
+          ${actionText}
+
+          ·
+
+          完成 ${d.completed.length} 项
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+  box.innerHTML=
+    html;
+
 }
 
 
-/* =========================
-   HTML 防注入
-========================= */
+/* =========================================================
+   周复盘
+========================================================= */
 
-function escapeHtml(str){
+function weekStart(key){
 
-  return String(str)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  const d=
+    parseDate(key);
+
+  let day=
+    d.getDay();
+
+  if(day===0){
+
+    day=7;
+
+  }
+
+  d.setDate(
+    d.getDate()-(day-1)
+  );
+
+  return dateKey(d);
 
 }
 
 
-/* =========================
+function weekDays(start){
+
+  const arr=[];
+
+  for(
+    let i=0;
+    i<7;
+    i++
+  ){
+
+    arr.push(
+      addDays(
+        start,
+        i
+      )
+    );
+
+  }
+
+  return arr;
+
+}
+
+
+function previousCompletedWeek(key){
+
+  const start=
+    weekStart(key);
+
+  const currentGrowth=
+    dateKey(
+      growthDate()
+    );
+
+  if(
+    start>=
+    weekStart(
+      currentGrowth
+    )
+  ){
+
+    return null;
+
+  }
+
+  return start;
+
+}
+
+
+function weekData(start){
+
+  const days=
+    weekDays(start);
+
+  let total=0;
+
+  let actionDays=0;
+  let englishDays=0;
+  let learnDays=0;
+  let bodyDays=0;
+  let observeDays=0;
+  let breakthroughDays=0;
+
+  let completed=[];
+  let observations=[];
+  let breakthroughs=[];
+  let actions=[];
+
+
+  days.forEach(key=>{
+
+    const d=
+      getDay(key);
+
+    const s=
+      scoreFor(key);
+
+    total+=
+      s.total;
+
+    if(s.action)
+      actionDays++;
+
+    if(s.english>=8)
+      englishDays++;
+
+    if(s.learn)
+      learnDays++;
+
+    if(s.body)
+      bodyDays++;
+
+    if(s.observe)
+      observeDays++;
+
+    if(s.breakthrough)
+      breakthroughDays++;
+
+
+    if(
+      d.action &&
+      d.result
+    ){
+
+      actions.push({
+
+        date:key,
+
+        action:d.action,
+
+        result:d.result
+
+      });
+
+    }
+
+
+    d.completed.forEach(x=>{
+
+      completed.push({
+
+        date:key,
+
+        text:x
+
+      });
+
+    });
+
+
+    if(
+      d.observation.trim()
+    ){
+
+      observations.push({
+
+        date:key,
+
+        text:d.observation
+
+      });
+
+    }
+
+
+    if(
+      d.breakthrough.trim()
+    ){
+
+      breakthroughs.push({
+
+        date:key,
+
+        text:d.breakthrough
+
+      });
+
+    }
+
+  });
+
+
+  return{
+
+    days,
+    total,
+
+    average:
+      Math.round(
+        total/7
+      ),
+
+    actionDays,
+    englishDays,
+    learnDays,
+    bodyDays,
+    observeDays,
+    breakthroughDays,
+
+    actions,
+    completed,
+    observations,
+    breakthroughs
+
+  };
+
+}
+
+
+/* =========================================================
+   周复盘页面
+========================================================= */
+
+function renderWeekly(){
+
+  const box=
+    document.getElementById(
+      "weeklyContent"
+    );
+
+  const start=
+    previousCompletedWeek(
+      selectedDate
+    );
+
+
+  if(!start){
+
+    document.getElementById(
+      "weekStatus"
+    ).textContent=
+      "本周尚未结束";
+
+    box.innerHTML=`
+
+      <div class="empty">
+
+        每周复盘会在下一成长周开始后解锁。
+
+        <br><br>
+
+        你现在要做的不是提前总结，
+        而是继续留下真实记录。
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const data=
+    weekData(start);
+
+  const old=
+    db[start]?.weekReview||null;
+
+
+  document.getElementById(
+    "weekStatus"
+  ).textContent=
+    `${
+      formatDate(start)
+    } ～ ${
+      formatDate(
+        addDays(start,6)
+      )
+    }`;
+
+
+  let actions=
+    data.actions.length
+
+      ?
+
+      data.actions.map(x=>`
+
+        <div class="completed">
+
+          <b>
+            ${formatDate(x.date)}
+          </b>
+
+          <br>
+
+          ${escapeHtml(x.action)}
+
+          <br>
+
+          <span style="color:var(--sub)">
+            结果：
+            ${escapeHtml(x.result)}
+          </span>
+
+        </div>
+
+      `).join("")
+
+      :
+
+      '<div class="empty">本周没有完整记录的关键行动。</div>';
+
+
+  let observations=
+    data.observations.length
+
+      ?
+
+      data.observations.map(x=>`
+
+        <div class="completed">
+
+          <b>
+            ${formatDate(x.date)}
+          </b>
+
+          <br>
+
+          ${escapeHtml(x.text)}
+
+        </div>
+
+      `).join("")
+
+      :
+
+      '<div class="empty">本周没有观察记录。</div>';
+
+
+  let breakthroughs=
+    data.breakthroughs.length
+
+      ?
+
+      data.breakthroughs.map(x=>`
+
+        <div class="completed">
+
+          <b>
+            ${formatDate(x.date)}
+          </b>
+
+          <br>
+
+          ${escapeHtml(x.text)}
+
+        </div>
+
+      `).join("")
+
+      :
+
+      '<div class="empty">本周没有突破记录。</div>';
+
+
+  box.innerHTML=`
+
+    <div class="week-score">
+      ${data.total} / 700
+    </div>
+
+    <div style="color:var(--sub);font-size:13px">
+      周平均 ${data.average} 分
+    </div>
+
+
+    <div class="stat-grid">
+
+      <div class="stat">
+        <small>真实行动</small>
+        <strong>${data.actionDays}/7</strong>
+      </div>
+
+      <div class="stat">
+        <small>英语</small>
+        <strong>${data.englishDays}/7</strong>
+      </div>
+
+      <div class="stat">
+        <small>商业/经济</small>
+        <strong>${data.learnDays}/7</strong>
+      </div>
+
+      <div class="stat">
+        <small>身体</small>
+        <strong>${data.bodyDays}/7</strong>
+      </div>
+
+      <div class="stat">
+        <small>观察</small>
+        <strong>${data.observeDays}/7</strong>
+      </div>
+
+      <div class="stat">
+        <small>突破</small>
+        <strong>${data.breakthroughDays}/7</strong>
+      </div>
+
+      <div class="stat">
+        <small>完成事项</small>
+        <strong>${data.completed.length}</strong>
+      </div>
+
+      <div class="stat">
+        <small>关键行动</small>
+        <strong>${data.actions.length}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="insight">
+
+      <b>本周系统提醒：</b>
+
+      <br><br>
+
+      你的周分数不是目的。
+
+      <br>
+
+      真正应该关注的是：
+
+      <br><br>
+
+      <b>
+      我有没有越来越快地从“想到”
+      → “尝试”
+      → “得到反馈”
+      → “调整”
+      → “再次尝试”？
+      </b>
+
+    </div>
+
+
+    <div style="margin-top:18px">
+
+      <b>
+        本周真正做成了什么？
+      </b>
+
+      <div style="height:8px"></div>
+
+      ${actions}
+
+    </div>
+
+
+    <div style="margin-top:18px">
+
+      <b>
+        本周你观察到了什么？
+      </b>
+
+      <div style="height:8px"></div>
+
+      ${observations}
+
+    </div>
+
+
+    <div style="margin-top:18px">
+
+      <b>
+        本周有哪些突破？
+      </b>
+
+      <div style="height:8px"></div>
+
+      ${breakthroughs}
+
+    </div>
+
+
+    <div style="margin-top:20px">
+
+      <b>
+        现在开始真正的复盘
+      </b>
+
+    </div>
+
+
+    <div style="height:10px"></div>
+
+
+    <div class="review-box">
+
+      <b>
+        ① 本周最重要的结果是什么？
+      </b>
+
+      <textarea
+        id="wr1"
+        placeholder="不要写“学到了很多”。写具体结果。">${
+          escapeHtml(
+            old?.r1||""
+          )
+        }</textarea>
+
+    </div>
+
+
+    <div class="review-box">
+
+      <b>
+        ② 哪件事情我高估了？
+      </b>
+
+      <textarea
+        id="wr2"
+        placeholder="原本以为会怎么样，实际发生了什么？">${
+          escapeHtml(
+            old?.r2||""
+          )
+        }</textarea>
+
+    </div>
+
+
+    <div class="review-box">
+
+      <b>
+        ③ 哪件事情我低估了？
+      </b>
+
+      <textarea
+        id="wr3"
+        placeholder="有什么机会、困难或价值，是你之前没有看清的？">${
+          escapeHtml(
+            old?.r3||""
+          )
+        }</textarea>
+
+    </div>
+
+
+    <div class="review-box">
+
+      <b>
+        ④ 本周最大的拖延是什么？
+      </b>
+
+      <textarea
+        id="wr4"
+        placeholder="哪件事情你明明知道应该做，却还是没有做？为什么？">${
+          escapeHtml(
+            old?.r4||""
+          )
+        }</textarea>
+
+    </div>
+
+
+    <div class="review-box">
+
+      <b>
+        ⑤ 本周最重要的新认知是什么？
+      </b>
+
+      <textarea
+        id="wr5"
+        placeholder="什么认知真正改变了你对现实的判断？">${
+          escapeHtml(
+            old?.r5||""
+          )
+        }</textarea>
+
+    </div>
+
+
+    <div class="review-box">
+
+      <b>
+        ⑥ 下周只抓哪 1～3 件事？
+      </b>
+
+      <textarea
+        id="wr6"
+        placeholder="最多三个。不要把愿望清单当计划。">${
+          escapeHtml(
+            old?.r6||""
+          )
+        }</textarea>
+
+    </div>
+
+
+    <button
+      onclick="saveWeekly('${start}')">
+
+      保存本周复盘
+
+    </button>
+
+  `;
+
+}
+
+
+function saveWeekly(start){
+
+  const day=
+    getDay(start);
+
+  day.weekReview={
+
+    r1:
+      document.getElementById(
+        "wr1"
+      ).value,
+
+    r2:
+      document.getElementById(
+        "wr2"
+      ).value,
+
+    r3:
+      document.getElementById(
+        "wr3"
+      ).value,
+
+    r4:
+      document.getElementById(
+        "wr4"
+      ).value,
+
+    r5:
+      document.getElementById(
+        "wr5"
+      ).value,
+
+    r6:
+      document.getElementById(
+        "wr6"
+      ).value,
+
+    savedAt:
+      new Date().toISOString()
+
+  };
+
+
+  saveDB();
+
+  renderWeekly();
+
+  alert(
+    "本周复盘已保存"
+  );
+
+}
+
+
+/* =========================================================
+   总渲染
+========================================================= */
+
+function render(){
+
+  getDay(
+    selectedDate
+  );
+
+  renderHeader();
+
+  renderInputs();
+
+  renderActionState();
+
+  renderQuestion();
+
+  renderYesterday();
+
+  renderWords();
+
+  renderCompleted();
+
+  renderScore();
+
+  renderRecent();
+
+  renderWeekly();
+
+}
+
+
+/* =========================================================
    启动
-========================= */
+========================================================= */
 
-renderAll();
+loadDB();
+
+
+if(
+  localStorage.getItem(
+    "life_dark"
+  )==="1"
+){
+
+  document.body.classList.add(
+    "dark"
+  );
+
+}
+
+
+render();
 
 </script>
 

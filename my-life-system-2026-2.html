@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的人生系统 · 2026</title>
+<style>
+:root{
+  --bg:#f5f5f2; --card:#ffffff; --text:#171717; --muted:#737373;
+  --line:#e8e8e3; --soft:#f0f0eb; --accent:#111;
+  --green:#247a4b; --orange:#a75d18; --blue:#245d91; --red:#9b3535;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:1080px;margin:auto;padding:28px 18px 70px}
+header{padding:28px 4px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:end}
+h1{font-size:34px;letter-spacing:-1px;margin:0 0 8px}
+.subtitle{color:var(--muted);font-size:14px}
+.date{font-size:13px;color:var(--muted);text-align:right}
+.hero{margin-top:22px;background:var(--text);color:#fff;border-radius:22px;padding:28px}
+.hero .label{font-size:12px;opacity:.65;letter-spacing:1px}
+.formula{font-size:25px;font-weight:700;margin:9px 0 8px;line-height:1.45}
+.hero p{margin:0;color:#cfcfcf;line-height:1.7;font-size:14px;max-width:760px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:21px}
+.card.full{grid-column:1/-1}
+.card-head{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.card h2{font-size:20px;margin:0}
+.tag{font-size:11px;padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--muted)}
+.equation{margin:14px 0;padding:13px 14px;background:#fafaf8;border:1px solid var(--line);border-radius:12px;font-weight:650;line-height:1.6}
+ul{margin:12px 0 0;padding-left:19px;color:#404040;line-height:1.85;font-size:14px}
+.small{font-size:13px;color:var(--muted);line-height:1.7}
+.now{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.now strong{font-size:13px}
+.goal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}
+.goal{border:1px solid var(--line);border-radius:14px;padding:16px}
+.goal b{display:block;font-size:14px;margin-bottom:5px}
+.goal span{font-size:13px;color:var(--muted);line-height:1.6}
+.actions{margin-top:20px}
+.action{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.action:last-child{border-bottom:0}
+.action input{width:19px;height:19px;accent-color:#111}
+.action label{font-size:14px;flex:1}
+.action em{font-style:normal;font-size:11px;color:var(--muted)}
+.progress{height:8px;background:#e8e8e3;border-radius:99px;overflow:hidden;margin-top:12px}
+.bar{height:100%;width:0;background:#111;transition:.25s}
+.progress-row{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--muted)}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.principle{padding:15px;background:#fafaf8;border:1px solid var(--line);border-radius:13px}
+.principle b{font-size:13px}.principle p{font-size:12px;color:var(--muted);line-height:1.6;margin:7px 0 0}
+footer{margin-top:25px;color:#999;font-size:11px;text-align:center}
+@media(max-width:720px){
+ header{align-items:start;flex-direction:column}.date{text-align:left}
+ h1{font-size:29px}.formula{font-size:21px}.grid,.goal-grid,.principles{grid-template-columns:1fr}
+ .card.full{grid-column:auto}.hero{padding:22px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>我的人生系统</h1>
+    <div class="subtitle">不是照抄纳瓦尔，而是把他的底层逻辑改造成我现在能执行的版本。</div>
+  </div>
+  <div class="date">当前阶段 · 26岁 / 2026<br>关键词：现金流 · 能力 · 杠杆 · 自由</div>
+</header>
+
+<section class="hero">
+  <div class="label">NORTH STAR</div>
+  <div class="formula">长期自由 = 健康 × 可持续收入 × 杠杆 × 高质量关系</div>
+  <p>现阶段不要急着追求“财富自由”。我的第一任务是建立能不断产生机会的能力系统：保持身体状态 → 保住现金流 → 找到真正擅长且市场愿意付费的问题 → 用 AI / 代码 / 内容放大 → 再让资本成为放大器。</p>
+</section>
+
+<div class="grid">
+
+<section class="card">
+  <div class="card-head"><h2>01 · 健康</h2><span class="tag">底层操作系统</span></div>
+  <div class="equation">健康 = 训练 + 睡眠 + 饮食 + 恢复</div>
+  <ul>
+    <li><b>训练：</b>健身持续，不追求每天极限。</li>
+    <li><b>睡眠：</b>优先保证规律和时长；熬夜不能被“学习”合理化。</li>
+    <li><b>饮食：</b>简单、稳定、可长期执行，不搞复杂养生。</li>
+  </ul>
+  <div class="now"><strong>当前策略</strong><div class="small">健身已经形成正反馈。真正需要补的是睡眠稳定性，而不是再找一个新健身项目。</div></div>
+</section>
+
+<section class="card">
+  <div class="card-head"><h2>02 · 收入</h2><span class="tag">当前第一优先级</span></div>
+  <div class="equation">收入 = 解决问题 × 交付结果 × 可复制性</div>
+  <ul>
+    <li><b>先现金流：</b>目前本金有限，投资不是主引擎。</li>
+    <li><b>找问题：</b>继续观察健身、餐饮、本地消费、内容等真实场景。</li>
+    <li><b>敢交付：</b>先做小产品、小服务、小实验，而不是等“够资格”。</li>
+  </ul>
+  <div class="now"><strong>当前策略</strong><div class="small">从“我会什么”切换成“别人愿意为什么结果付钱”。</div></div>
+</section>
+
+<section class="card">
+  <div class="card-head"><h2>03 · 专长</h2><span class="tag">未来5年的核心资产</span></div>
+  <div class="equation">专长 = 兴趣 × 长期积累 × 真实问题 × 输出</div>
+  <ul>
+    <li><b>英语：</b>目标是5年后能够自然交流，不只是背单词。</li>
+    <li><b>商业观察：</b>训练“发现规则 → 找未满足需求 → 低成本验证”。</li>
+    <li><b>AI / 代码：</b>把想法做成网页、工具和可验证的产品。</li>
+    <li><b>内容：</b>把自己的观察变成公开输出，用市场反馈筛选价值。</li>
+  </ul>
+</section>
+
+<section class="card">
+  <div class="card-head"><h2>04 · 杠杆</h2><span class="tag">放大器</span></div>
+  <div class="equation">杠杆 = AI + 代码 + 内容 + 资本</div>
+  <ul>
+    <li><b>第一层：</b>AI / Codex，降低做产品的技术门槛。</li>
+    <li><b>第二层：</b>内容，让一次思考可以触达更多人。</li>
+    <li><b>第三层：</b>产品，让一次劳动可以重复交付。</li>
+    <li><b>第四层：</b>资本；等本金和认知都更扎实后再放大。</li>
+  </ul>
+  <div class="now"><strong>警戒线</strong><div class="small">28U、几百元基金可以用来学习市场，但不能把“买入”误认为“建立财富系统”。</div></div>
+</section>
+
+<section class="card full">
+  <div class="card-head"><h2>05 · 责任与个人品牌</h2><span class="tag">从“想法”到“结果”</span></div>
+  <div class="equation">责任 = 对一个问题持续负责 + 能交付 + 能承担反馈</div>
+  <div class="principles">
+    <div class="principle"><b>先行动，再完善</b><p>你现在最大的摩擦不是不会，而是开始前总想把自己变得“足够资格”。</p></div>
+    <div class="principle"><b>小额验证</b><p>先让一个真实用户使用、付费或拒绝，再决定是否继续投入。</p></div>
+    <div class="principle"><b>结果优先</b><p>学习、思考、写文章都只是输入；真正的资产是解决问题后的结果。</p></div>
+  </div>
+</section>
+
+<section class="card full">
+  <div class="card-head"><h2>06 · 关系</h2><span class="tag">不是数量，而是质量</span></div>
+  <div class="equation">高质量关系 = 边界 + 真诚 + 共同成长 + 现实连接</div>
+  <ul>
+    <li>家人：建立边界，让沟通不再只围绕婚姻、存钱和“你应该怎样”。</li>
+    <li>朋友 / 伴侣：不靠猜测维系关系，用真实行动和明确沟通判断关系。</li>
+    <li>社会关系：把每一次真实交流都当作理解用户和世界的机会。</li>
+  </ul>
+</section>
+
+<section class="card full">
+  <div class="card-head"><h2>07 · 我的长期坐标</h2><span class="tag">方向，不是压力</span></div>
+  <div class="goal-grid">
+    <div class="goal"><b>2026 → 2031 · 五年</b><span>英语达到流利交流水平；形成至少一项能独立变现的能力；建立稳定现金流；持续做产品/内容实验。</span></div>
+    <div class="goal"><b>2026 → 2035 · 十年</b><span>去美国生活、旅行或开展其他真实体验。重点不是“必须以什么身份去”，而是让自己拥有选择去哪里的能力。</span></div>
+  </div>
+</section>
+
+<section class="card full">
+  <div class="card-head"><h2>今日执行 · 把人生系统落到今天</h2><span class="tag">只记录事实</span></div>
+  <div class="actions">
+    <div class="action"><input type="checkbox" id="a1"><label for="a1">英语 ≥ 30 分钟：今天真正开口 / 理解一个语法点</label><em>能力</em></div>
+    <div class="action"><input type="checkbox" id="a2"><label for="a2">完成训练或主动恢复：不拿“没时间”当默认答案</label><em>健康</em></div>
+    <div class="action"><input type="checkbox" id="a3"><label for="a3">观察一个真实商业问题，并写下“谁痛、为什么痛、现在怎么解决”</label><em>商业</em></div>
+    <div class="action"><input type="checkbox" id="a4"><label for="a4">做一个最小输出：文章 / 网页 / 用户访谈 / 产品实验，四选一</label><em>行动</em></div>
+    <div class="action"><input type="checkbox" id="a5"><label for="a5">至少一次真实沟通：主动问一个人，而不是只在脑子里分析</label><em>关系</em></div>
+  </div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="progress-row"><span id="pct">0% 完成</span><span>完成事实 > 记录感受 > 继续迭代</span></div>
+</section>
+
+<section class="card full">
+  <div class="card-head"><h2>我的反内耗规则</h2><span class="tag">看到就执行</span></div>
+  <div class="principles">
+    <div class="principle"><b>1. 不等资格</b><p>不会 → 做最小版本 → 被现实纠正 → 再学。</p></div>
+    <div class="principle"><b>2. 不用学习逃避交付</b><p>如果一个知识连续三次没有进入现实行动，就停止继续收集。</p></div>
+    <div class="principle"><b>3. 不把投资当主线</b><p>本金小时，最值得投资的是能提高未来收入上限的能力。</p></div>
+  </div>
+</section>
+
+</div>
+<footer>我的人生系统 · v1.0 · 2026.09 · 每天只问一个问题：今天有没有让未来的自己多一个选择？</footer>
+</div>
+
+<script>
+const boxes=[...document.querySelectorAll('.action input')];
+function update(){
+  const done=boxes.filter(x=>x.checked).length;
+  const pct=Math.round(done/boxes.length*100);
+  document.getElementById('bar').style.width=pct+'%';
+  document.getElementById('pct').textContent=pct+'% 完成';
+  localStorage.setItem('life-system-checks',JSON.stringify(boxes.map(x=>x.checked)));
+}
+const saved=JSON.parse(localStorage.getItem('life-system-checks')||'[]');
+boxes.forEach((x,i)=>{if(saved[i])x.checked=true;x.addEventListener('change',update)});
+update();
+</script>
+</body>
+</html>

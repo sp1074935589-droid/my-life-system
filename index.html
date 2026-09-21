@@ -1,190 +1,1434 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>我的人生系统 · 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>成长驾驶舱 v3</title>
+
 <style>
 :root{
-  --bg:#f5f5f2; --card:#ffffff; --text:#171717; --muted:#737373;
-  --line:#e8e8e3; --soft:#f0f0eb; --accent:#111;
-  --green:#247a4b; --orange:#a75d18; --blue:#245d91; --red:#9b3535;
+  --bg:#f4f5f7;
+  --card:#fff;
+  --text:#17191c;
+  --sub:#777d86;
+  --line:#e5e7eb;
+  --soft:#f0f2f5;
+  --accent:#111827;
+  --good:#16803c;
+  --warn:#b45309;
+  --danger:#dc2626;
 }
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
-.wrap{max-width:1080px;margin:auto;padding:28px 18px 70px}
-header{padding:28px 4px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:end}
-h1{font-size:34px;letter-spacing:-1px;margin:0 0 8px}
-.subtitle{color:var(--muted);font-size:14px}
-.date{font-size:13px;color:var(--muted);text-align:right}
-.hero{margin-top:22px;background:var(--text);color:#fff;border-radius:22px;padding:28px}
-.hero .label{font-size:12px;opacity:.65;letter-spacing:1px}
-.formula{font-size:25px;font-weight:700;margin:9px 0 8px;line-height:1.45}
-.hero p{margin:0;color:#cfcfcf;line-height:1.7;font-size:14px;max-width:760px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:21px}
-.card.full{grid-column:1/-1}
-.card-head{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.card h2{font-size:20px;margin:0}
-.tag{font-size:11px;padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--muted)}
-.equation{margin:14px 0;padding:13px 14px;background:#fafaf8;border:1px solid var(--line);border-radius:12px;font-weight:650;line-height:1.6}
-ul{margin:12px 0 0;padding-left:19px;color:#404040;line-height:1.85;font-size:14px}
-.small{font-size:13px;color:var(--muted);line-height:1.7}
-.now{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
-.now strong{font-size:13px}
-.goal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}
-.goal{border:1px solid var(--line);border-radius:14px;padding:16px}
-.goal b{display:block;font-size:14px;margin-bottom:5px}
-.goal span{font-size:13px;color:var(--muted);line-height:1.6}
-.actions{margin-top:20px}
-.action{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
-.action:last-child{border-bottom:0}
-.action input{width:19px;height:19px;accent-color:#111}
-.action label{font-size:14px;flex:1}
-.action em{font-style:normal;font-size:11px;color:var(--muted)}
-.progress{height:8px;background:#e8e8e3;border-radius:99px;overflow:hidden;margin-top:12px}
-.bar{height:100%;width:0;background:#111;transition:.25s}
-.progress-row{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--muted)}
-.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.principle{padding:15px;background:#fafaf8;border:1px solid var(--line);border-radius:13px}
-.principle b{font-size:13px}.principle p{font-size:12px;color:var(--muted);line-height:1.6;margin:7px 0 0}
-footer{margin-top:25px;color:#999;font-size:11px;text-align:center}
-@media(max-width:720px){
- header{align-items:start;flex-direction:column}.date{text-align:left}
- h1{font-size:29px}.formula{font-size:21px}.grid,.goal-grid,.principles{grid-template-columns:1fr}
- .card.full{grid-column:auto}.hero{padding:22px}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
+  "PingFang SC","Microsoft YaHei",sans-serif;
+}
+
+.container{
+  width:min(760px,calc(100% - 24px));
+  margin:auto;
+  padding:18px 0 50px;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* 顶部 */
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.logo{
+  font-size:23px;
+  font-weight:800;
+}
+
+.version{
+  color:var(--sub);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.theme{
+  border:1px solid var(--line);
+  background:var(--card);
+  border-radius:12px;
+  width:42px;
+  height:42px;
+}
+
+/* 日期 */
+
+.date-card{
+  background:var(--accent);
+  color:white;
+  border-radius:20px;
+  padding:22px;
+  margin-bottom:14px;
+}
+
+.date-small{
+  opacity:.6;
+  font-size:12px;
+}
+
+.date{
+  font-size:27px;
+  font-weight:800;
+  margin-top:5px;
+}
+
+/* 通用 */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:14px;
+}
+
+.title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.title h2{
+  font-size:18px;
+  margin:0;
+}
+
+.title span{
+  color:var(--sub);
+  font-size:12px;
+}
+
+/* 分数 */
+
+.score-box{
+  text-align:center;
+  padding:6px 0 12px;
+}
+
+.score{
+  font-size:52px;
+  font-weight:900;
+  letter-spacing:-2px;
+}
+
+.score-label{
+  color:var(--sub);
+  font-size:13px;
+}
+
+.score-message{
+  margin-top:7px;
+  font-size:13px;
+}
+
+.score-bars{
+  margin-top:18px;
+}
+
+.score-row{
+  display:grid;
+  grid-template-columns:60px 1fr 45px;
+  gap:9px;
+  align-items:center;
+  margin:9px 0;
+  font-size:12px;
+}
+
+.bar{
+  height:7px;
+  background:var(--soft);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.bar-inner{
+  height:100%;
+  width:0;
+  background:var(--accent);
+  border-radius:20px;
+}
+
+/* 关键动作 */
+
+.key-action{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+}
+
+.key-action textarea{
+  width:100%;
+  min-height:75px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:12px;
+  background:var(--bg);
+  outline:none;
+}
+
+.action-row{
+  display:flex;
+  gap:8px;
+  margin-top:9px;
+}
+
+.primary{
+  background:var(--accent);
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+}
+
+.complete{
+  background:#16803c;
+  color:white;
+}
+
+.result-input{
+  flex:1;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:9px;
+  min-width:0;
+}
+
+/* 提示 */
+
+.prompt-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.prompt{
+  border:1px solid var(--line);
+  background:var(--card);
+  border-radius:13px;
+  padding:13px;
+  text-align:left;
+  transition:.15s;
+}
+
+.prompt:active{
+  transform:scale(.97);
+}
+
+.prompt-icon{
+  font-size:20px;
+}
+
+.prompt-name{
+  font-weight:700;
+  margin-top:5px;
+}
+
+.prompt-sub{
+  color:var(--sub);
+  font-size:11px;
+  margin-top:3px;
+}
+
+/* 记录 */
+
+.task-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.task{
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px;
+}
+
+.task-top{
+  display:flex;
+  gap:10px;
+}
+
+.check{
+  width:22px;
+  height:22px;
+  border:1px solid #bbb;
+  border-radius:7px;
+  background:white;
+  flex:none;
+}
+
+.task.done .check{
+  background:var(--accent);
+  color:white;
+}
+
+.task.done .task-text{
+  text-decoration:line-through;
+  opacity:.45;
+}
+
+.task-text{
+  flex:1;
+  line-height:1.6;
+  white-space:pre-wrap;
+}
+
+.task-bottom{
+  display:flex;
+  gap:7px;
+  align-items:center;
+  margin-top:9px;
+  padding-left:32px;
+}
+
+.tag{
+  background:var(--soft);
+  padding:4px 8px;
+  border-radius:7px;
+  color:var(--sub);
+  font-size:11px;
+}
+
+.small{
+  border:none;
+  background:none;
+  color:var(--sub);
+  font-size:12px;
+}
+
+.delete{
+  color:var(--danger);
+}
+
+/* 自定义记录 */
+
+.custom-input{
+  width:100%;
+  min-height:100px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px;
+  outline:none;
+  background:var(--bg);
+}
+
+/* 反思 */
+
+.reflection{
+  width:100%;
+  min-height:90px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+  background:var(--bg);
+  outline:none;
+  line-height:1.6;
+}
+
+/* 七天 */
+
+.week{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+
+.day{
+  text-align:center;
+  font-size:10px;
+  color:var(--sub);
+}
+
+.day-score{
+  margin-top:5px;
+  height:40px;
+  border-radius:9px;
+  background:var(--soft);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:11px;
+  font-weight:700;
+}
+
+.day-score.active{
+  background:var(--accent);
+  color:white;
+}
+
+/* 空状态 */
+
+.empty{
+  text-align:center;
+  padding:20px 8px;
+  color:var(--sub);
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* Toast */
+
+.toast{
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translate(-50%,20px);
+  background:#111827;
+  color:white;
+  padding:9px 15px;
+  border-radius:10px;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  font-size:13px;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* 夜间 */
+
+body.dark{
+  --bg:#111315;
+  --card:#191c20;
+  --text:#f1f3f5;
+  --sub:#969da6;
+  --line:#2b3037;
+  --soft:#252a30;
+  --accent:#f1f3f5;
+}
+
+body.dark .date-card{
+  background:#f1f3f5;
+  color:#111315;
+}
+
+body.dark .primary{
+  color:#111315;
+}
+
+body.dark .check{
+  background:#191c20;
+}
+
+body.dark .task.done .check{
+  background:#f1f3f5;
+  color:#111315;
+}
+
+body.dark textarea,
+body.dark input{
+  color:var(--text);
+}
+
+/* 手机 */
+
+@media(max-width:520px){
+
+  .container{
+    width:calc(100% - 16px);
+    padding-top:12px;
+  }
+
+  .card{
+    padding:15px;
+    border-radius:16px;
+  }
+
+  .prompt-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .score{
+    font-size:48px;
+  }
+
+  .action-row{
+    flex-wrap:wrap;
+  }
+
+  .result-input{
+    min-width:100%;
+  }
+
 }
 </style>
 </head>
+
 <body>
-<div class="wrap">
-<header>
+
+<div class="container">
+
+<!-- 顶部 -->
+
+<div class="header">
+
   <div>
-    <h1>我的人生系统</h1>
-    <div class="subtitle">不是照抄纳瓦尔，而是把他的底层逻辑改造成我现在能执行的版本。</div>
+    <div class="logo">成长驾驶舱</div>
+    <div class="version">Life System · v3</div>
   </div>
-  <div class="date">当前阶段 · 26岁 / 2026<br>关键词：现金流 · 能力 · 杠杆 · 自由</div>
-</header>
 
-<section class="hero">
-  <div class="label">NORTH STAR</div>
-  <div class="formula">长期自由 = 健康 × 可持续收入 × 杠杆 × 高质量关系</div>
-  <p>现阶段不要急着追求“财富自由”。我的第一任务是建立能不断产生机会的能力系统：保持身体状态 → 保住现金流 → 找到真正擅长且市场愿意付费的问题 → 用 AI / 代码 / 内容放大 → 再让资本成为放大器。</p>
-</section>
-
-<div class="grid">
-
-<section class="card">
-  <div class="card-head"><h2>01 · 健康</h2><span class="tag">底层操作系统</span></div>
-  <div class="equation">健康 = 训练 + 睡眠 + 饮食 + 恢复</div>
-  <ul>
-    <li><b>训练：</b>健身持续，不追求每天极限。</li>
-    <li><b>睡眠：</b>优先保证规律和时长；熬夜不能被“学习”合理化。</li>
-    <li><b>饮食：</b>简单、稳定、可长期执行，不搞复杂养生。</li>
-  </ul>
-  <div class="now"><strong>当前策略</strong><div class="small">健身已经形成正反馈。真正需要补的是睡眠稳定性，而不是再找一个新健身项目。</div></div>
-</section>
-
-<section class="card">
-  <div class="card-head"><h2>02 · 收入</h2><span class="tag">当前第一优先级</span></div>
-  <div class="equation">收入 = 解决问题 × 交付结果 × 可复制性</div>
-  <ul>
-    <li><b>先现金流：</b>目前本金有限，投资不是主引擎。</li>
-    <li><b>找问题：</b>继续观察健身、餐饮、本地消费、内容等真实场景。</li>
-    <li><b>敢交付：</b>先做小产品、小服务、小实验，而不是等“够资格”。</li>
-  </ul>
-  <div class="now"><strong>当前策略</strong><div class="small">从“我会什么”切换成“别人愿意为什么结果付钱”。</div></div>
-</section>
-
-<section class="card">
-  <div class="card-head"><h2>03 · 专长</h2><span class="tag">未来5年的核心资产</span></div>
-  <div class="equation">专长 = 兴趣 × 长期积累 × 真实问题 × 输出</div>
-  <ul>
-    <li><b>英语：</b>目标是5年后能够自然交流，不只是背单词。</li>
-    <li><b>商业观察：</b>训练“发现规则 → 找未满足需求 → 低成本验证”。</li>
-    <li><b>AI / 代码：</b>把想法做成网页、工具和可验证的产品。</li>
-    <li><b>内容：</b>把自己的观察变成公开输出，用市场反馈筛选价值。</li>
-  </ul>
-</section>
-
-<section class="card">
-  <div class="card-head"><h2>04 · 杠杆</h2><span class="tag">放大器</span></div>
-  <div class="equation">杠杆 = AI + 代码 + 内容 + 资本</div>
-  <ul>
-    <li><b>第一层：</b>AI / Codex，降低做产品的技术门槛。</li>
-    <li><b>第二层：</b>内容，让一次思考可以触达更多人。</li>
-    <li><b>第三层：</b>产品，让一次劳动可以重复交付。</li>
-    <li><b>第四层：</b>资本；等本金和认知都更扎实后再放大。</li>
-  </ul>
-  <div class="now"><strong>警戒线</strong><div class="small">28U、几百元基金可以用来学习市场，但不能把“买入”误认为“建立财富系统”。</div></div>
-</section>
-
-<section class="card full">
-  <div class="card-head"><h2>05 · 责任与个人品牌</h2><span class="tag">从“想法”到“结果”</span></div>
-  <div class="equation">责任 = 对一个问题持续负责 + 能交付 + 能承担反馈</div>
-  <div class="principles">
-    <div class="principle"><b>先行动，再完善</b><p>你现在最大的摩擦不是不会，而是开始前总想把自己变得“足够资格”。</p></div>
-    <div class="principle"><b>小额验证</b><p>先让一个真实用户使用、付费或拒绝，再决定是否继续投入。</p></div>
-    <div class="principle"><b>结果优先</b><p>学习、思考、写文章都只是输入；真正的资产是解决问题后的结果。</p></div>
-  </div>
-</section>
-
-<section class="card full">
-  <div class="card-head"><h2>06 · 关系</h2><span class="tag">不是数量，而是质量</span></div>
-  <div class="equation">高质量关系 = 边界 + 真诚 + 共同成长 + 现实连接</div>
-  <ul>
-    <li>家人：建立边界，让沟通不再只围绕婚姻、存钱和“你应该怎样”。</li>
-    <li>朋友 / 伴侣：不靠猜测维系关系，用真实行动和明确沟通判断关系。</li>
-    <li>社会关系：把每一次真实交流都当作理解用户和世界的机会。</li>
-  </ul>
-</section>
-
-<section class="card full">
-  <div class="card-head"><h2>07 · 我的长期坐标</h2><span class="tag">方向，不是压力</span></div>
-  <div class="goal-grid">
-    <div class="goal"><b>2026 → 2031 · 五年</b><span>英语达到流利交流水平；形成至少一项能独立变现的能力；建立稳定现金流；持续做产品/内容实验。</span></div>
-    <div class="goal"><b>2026 → 2035 · 十年</b><span>去美国生活、旅行或开展其他真实体验。重点不是“必须以什么身份去”，而是让自己拥有选择去哪里的能力。</span></div>
-  </div>
-</section>
-
-<section class="card full">
-  <div class="card-head"><h2>今日执行 · 把人生系统落到今天</h2><span class="tag">只记录事实</span></div>
-  <div class="actions">
-    <div class="action"><input type="checkbox" id="a1"><label for="a1">英语 ≥ 30 分钟：今天真正开口 / 理解一个语法点</label><em>能力</em></div>
-    <div class="action"><input type="checkbox" id="a2"><label for="a2">完成训练或主动恢复：不拿“没时间”当默认答案</label><em>健康</em></div>
-    <div class="action"><input type="checkbox" id="a3"><label for="a3">观察一个真实商业问题，并写下“谁痛、为什么痛、现在怎么解决”</label><em>商业</em></div>
-    <div class="action"><input type="checkbox" id="a4"><label for="a4">做一个最小输出：文章 / 网页 / 用户访谈 / 产品实验，四选一</label><em>行动</em></div>
-    <div class="action"><input type="checkbox" id="a5"><label for="a5">至少一次真实沟通：主动问一个人，而不是只在脑子里分析</label><em>关系</em></div>
-  </div>
-  <div class="progress"><div class="bar" id="bar"></div></div>
-  <div class="progress-row"><span id="pct">0% 完成</span><span>完成事实 > 记录感受 > 继续迭代</span></div>
-</section>
-
-<section class="card full">
-  <div class="card-head"><h2>我的反内耗规则</h2><span class="tag">看到就执行</span></div>
-  <div class="principles">
-    <div class="principle"><b>1. 不等资格</b><p>不会 → 做最小版本 → 被现实纠正 → 再学。</p></div>
-    <div class="principle"><b>2. 不用学习逃避交付</b><p>如果一个知识连续三次没有进入现实行动，就停止继续收集。</p></div>
-    <div class="principle"><b>3. 不把投资当主线</b><p>本金小时，最值得投资的是能提高未来收入上限的能力。</p></div>
-  </div>
-</section>
+  <button class="theme" onclick="toggleTheme()">◐</button>
 
 </div>
-<footer>我的人生系统 · v1.0 · 2026.09 · 每天只问一个问题：今天有没有让未来的自己多一个选择？</footer>
+
+<!-- 日期 -->
+
+<div class="date-card">
+
+  <div class="date-small">TODAY</div>
+
+  <div class="date" id="date"></div>
+
 </div>
+
+<!-- 成长分 -->
+
+<div class="card">
+
+  <div class="title">
+    <h2>今日成长分</h2>
+    <span>系统根据记录计算</span>
+  </div>
+
+  <div class="score-box">
+
+    <div class="score" id="score">0</div>
+
+    <div class="score-label">/ 100</div>
+
+    <div class="score-message" id="scoreMessage">
+      今天还没有足够的行动证据
+    </div>
+
+  </div>
+
+  <div class="score-bars">
+
+    <div class="score-row">
+      <span>行动</span>
+      <div class="bar">
+        <div class="bar-inner" id="actionBar"></div>
+      </div>
+      <span id="actionScore">0/30</span>
+    </div>
+
+    <div class="score-row">
+      <span>学习</span>
+      <div class="bar">
+        <div class="bar-inner" id="learnBar"></div>
+      </div>
+      <span id="learnScore">0/20</span>
+    </div>
+
+    <div class="score-row">
+      <span>身体</span>
+      <div class="bar">
+        <div class="bar-inner" id="bodyBar"></div>
+      </div>
+      <span id="bodyScore">0/20</span>
+    </div>
+
+    <div class="score-row">
+      <span>观察</span>
+      <div class="bar">
+        <div class="bar-inner" id="observeBar"></div>
+      </div>
+      <span id="observeScore">0/15</span>
+    </div>
+
+    <div class="score-row">
+      <span>突破</span>
+      <div class="bar">
+        <div class="bar-inner" id="breakBar"></div>
+      </div>
+      <span id="breakScore">0/15</span>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- 今日关键动作 -->
+
+<div class="card">
+
+  <div class="title">
+    <h2>🔥 今日关键动作</h2>
+    <span>只选一个</span>
+  </div>
+
+  <div class="key-action">
+
+    <textarea
+      id="keyAction"
+      placeholder="今天真正值得完成的一件事是什么？"
+    ></textarea>
+
+    <div class="action-row">
+
+      <button
+        class="primary"
+        onclick="completeKeyAction()"
+        id="completeBtn"
+      >
+        ✓ 标记完成
+      </button>
+
+    </div>
+
+    <div
+      id="resultArea"
+      style="display:none;margin-top:10px"
+    >
+
+      <input
+        class="result-input"
+        id="actionResult"
+        placeholder="结果是什么？"
+        oninput="saveField('actionResult',this.value)"
+      >
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- 提示式记录 -->
+
+<div class="card">
+
+  <div class="title">
+
+    <h2>📋 今天做了什么？</h2>
+
+    <span>选择一个入口</span>
+
+  </div>
+
+  <div class="prompt-grid">
+
+    <button class="prompt" onclick="usePrompt('身体','今天做了什么运动？训练了什么？')">
+      <div class="prompt-icon">🏋️</div>
+      <div class="prompt-name">身体</div>
+      <div class="prompt-sub">健身 / 走路 / 饮食</div>
+    </button>
+
+    <button class="prompt" onclick="usePrompt('学习','今天具体学会了什么？不要只写“学习了”。')">
+      <div class="prompt-icon">🧠</div>
+      <div class="prompt-name">学习</div>
+      <div class="prompt-sub">英语 / 技能 / 知识</div>
+    </button>
+
+    <button class="prompt" onclick="usePrompt('能力','今天做了什么能提高未来赚钱能力的事情？')">
+      <div class="prompt-icon">💰</div>
+      <div class="prompt-name">能力</div>
+      <div class="prompt-sub">赚钱 / 项目 / 技能</div>
+    </button>
+
+    <button class="prompt" onclick="usePrompt('观察','今天观察到了什么真实的问题、需求或规律？')">
+      <div class="prompt-icon">🔎</div>
+      <div class="prompt-name">观察</div>
+      <div class="prompt-sub">商业 / 用户 / 社会</div>
+    </button>
+
+    <button class="prompt" onclick="usePrompt('行动','今天有没有把一个想法真正变成行动？')">
+      <div class="prompt-icon">🚪</div>
+      <div class="prompt-name">行动</div>
+      <div class="prompt-sub">执行 / 尝试 / 推进</div>
+    </button>
+
+    <button class="prompt" onclick="usePrompt('突破','今天有没有做一件平时容易逃避的事情？')">
+      <div class="prompt-icon">⚡</div>
+      <div class="prompt-name">突破</div>
+      <div class="prompt-sub">勇气 / 主动 / 舒适区</div>
+    </button>
+
+  </div>
+
+</div>
+
+<!-- 今日记录 -->
+
+<div class="card">
+
+  <div class="title">
+    <h2>今日事实</h2>
+    <span id="count">0 件</span>
+  </div>
+
+  <div id="tasks" class="task-list"></div>
+
+</div>
+
+<!-- 自定义 -->
+
+<div class="card">
+
+  <div class="title">
+    <h2>📝 还有什么？</h2>
+    <span>自由记录</span>
+  </div>
+
+  <textarea
+    id="custom"
+    class="custom-input"
+    placeholder="任何不属于上面分类，但你觉得值得记录的事情……"
+  ></textarea>
+
+  <button
+    class="primary"
+    style="margin-top:10px"
+    onclick="addCustom()"
+  >
+    ＋ 添加记录
+  </button>
+
+</div>
+
+<!-- 新发现 -->
+
+<div class="card">
+
+  <div class="title">
+    <h2>💡 今天的新发现</h2>
+    <span>从事实提炼规律</span>
+  </div>
+
+  <textarea
+    class="reflection"
+    id="discovery"
+    placeholder="今天有没有发现一个以前没注意到的规律？"
+  ></textarea>
+
+</div>
+
+<!-- 防糊弄 -->
+
+<div class="card">
+
+  <div class="title">
+    <h2>🪞 防糊弄检查</h2>
+    <span>诚实比高分重要</span>
+  </div>
+
+  <div class="empty" id="antiCheat">
+    等你记录今天的事情后，我再问你一个问题。
+  </div>
+
+</div>
+
+<!-- 明日 -->
+
+<div class="card">
+
+  <div class="title">
+    <h2>🎯 明天继续什么？</h2>
+    <span>一个动作</span>
+  </div>
+
+  <textarea
+    class="reflection"
+    id="tomorrow"
+    placeholder="明天最值得继续的一个具体动作是什么？"
+  ></textarea>
+
+</div>
+
+<!-- 7天 -->
+
+<div class="card">
+
+  <div class="title">
+    <h2>📊 最近 7 天</h2>
+    <span>看趋势，不看鸡血</span>
+  </div>
+
+  <div class="week" id="week"></div>
+
+</div>
+
+<div style="text-align:center;color:var(--sub);font-size:11px;margin-top:22px">
+  不记录“我想成为谁”。<br>
+  记录“我今天到底做了什么”。
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-const boxes=[...document.querySelectorAll('.action input')];
-function update(){
-  const done=boxes.filter(x=>x.checked).length;
-  const pct=Math.round(done/boxes.length*100);
-  document.getElementById('bar').style.width=pct+'%';
-  document.getElementById('pct').textContent=pct+'% 完成';
-  localStorage.setItem('life-system-checks',JSON.stringify(boxes.map(x=>x.checked)));
+
+const KEY="life_system_v3";
+
+let db=JSON.parse(
+  localStorage.getItem(KEY)||"{}"
+);
+
+const today=getToday();
+
+if(!db[today]){
+
+  db[today]={
+    tasks:[],
+    keyAction:"",
+    keyDone:false,
+    actionResult:"",
+    discovery:"",
+    tomorrow:""
+  };
+
+  save();
+
 }
-const saved=JSON.parse(localStorage.getItem('life-system-checks')||'[]');
-boxes.forEach((x,i)=>{if(saved[i])x.checked=true;x.addEventListener('change',update)});
-update();
+
+function getToday(){
+
+  const d=new Date();
+
+  return d.getFullYear()+"-"+
+    String(d.getMonth()+1).padStart(2,"0")+"-"+
+    String(d.getDate()).padStart(2,"0");
+
+}
+
+function save(){
+
+  localStorage.setItem(KEY,JSON.stringify(db));
+
+}
+
+function showToast(text){
+
+  const t=document.getElementById("toast");
+
+  t.textContent=text;
+
+  t.classList.add("show");
+
+  setTimeout(()=>{
+    t.classList.remove("show");
+  },1400);
+
+}
+
+/* 日期 */
+
+function initDate(){
+
+  const d=new Date(today+"T00:00:00");
+
+  const week=[
+    "星期日","星期一","星期二",
+    "星期三","星期四","星期五","星期六"
+  ];
+
+  document.getElementById("date").textContent=
+    `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 ${week[d.getDay()]}`;
+
+}
+
+/* 提示入口 */
+
+function usePrompt(category,prompt){
+
+  const text=window.prompt(prompt);
+
+  if(!text || !text.trim()) return;
+
+  db[today].tasks.push({
+
+    id:Date.now(),
+
+    text:text.trim(),
+
+    category,
+
+    done:true
+
+  });
+
+  save();
+
+  render();
+
+  showToast("已记录");
+
+}
+
+/* 自定义 */
+
+function addCustom(){
+
+  const input=document.getElementById("custom");
+
+  const text=input.value.trim();
+
+  if(!text){
+
+    showToast("还没有填写内容");
+
+    return;
+
+  }
+
+  db[today].tasks.push({
+
+    id:Date.now(),
+
+    text,
+
+    category:"其他",
+
+    done:true
+
+  });
+
+  input.value="";
+
+  save();
+
+  render();
+
+  showToast("已记录");
+
+}
+
+/* 任务 */
+
+function toggleTask(id){
+
+  const t=db[today].tasks.find(x=>x.id===id);
+
+  if(!t)return;
+
+  t.done=!t.done;
+
+  save();
+
+  render();
+
+}
+
+function deleteTask(id){
+
+  db[today].tasks=
+    db[today].tasks.filter(x=>x.id!==id);
+
+  save();
+
+  render();
+
+}
+
+/* 渲染 */
+
+function renderTasks(){
+
+  const box=document.getElementById("tasks");
+
+  box.innerHTML="";
+
+  const tasks=db[today].tasks;
+
+  document.getElementById("count").textContent=
+    `${tasks.length} 件`;
+
+  if(!tasks.length){
+
+    box.innerHTML=`
+      <div class="empty">
+        还没有记录。<br>
+        点击上面的一个提示开始。
+      </div>
+    `;
+
+    return;
+
+  }
+
+  tasks.forEach(task=>{
+
+    const div=document.createElement("div");
+
+    div.className=
+      "task"+(task.done?" done":"");
+
+    div.innerHTML=`
+
+      <div class="task-top">
+
+        <button
+          class="check"
+          onclick="toggleTask(${task.id})"
+        >
+          ${task.done?"✓":""}
+        </button>
+
+        <div class="task-text">
+          ${escape(task.text)}
+        </div>
+
+      </div>
+
+      <div class="task-bottom">
+
+        <span class="tag">
+          ${escape(task.category)}
+        </span>
+
+        <button
+          class="small delete"
+          onclick="deleteTask(${task.id})"
+        >
+          删除
+        </button>
+
+      </div>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+/* 分数 */
+
+function calculateScore(){
+
+  const tasks=db[today].tasks;
+
+  let action=0;
+  let learn=0;
+  let body=0;
+  let observe=0;
+  let breaking=0;
+
+  tasks.forEach(t=>{
+
+    if(!t.done)return;
+
+    switch(t.category){
+
+      case"行动":
+        action+=15;
+        break;
+
+      case"学习":
+        learn+=10;
+        break;
+
+      case"身体":
+        body+=10;
+        break;
+
+      case"观察":
+        observe+=8;
+        break;
+
+      case"突破":
+        breaking+=8;
+        break;
+
+      case"能力":
+        action+=10;
+        break;
+
+      case"社交":
+        breaking+=5;
+        break;
+
+    }
+
+  });
+
+  if(db[today].keyDone){
+
+    action+=10;
+
+  }
+
+  action=Math.min(action,30);
+  learn=Math.min(learn,20);
+  body=Math.min(body,20);
+  observe=Math.min(observe,15);
+  breaking=Math.min(breaking,15);
+
+  return{
+    action,
+    learn,
+    body,
+    observe,
+    breaking,
+    total:
+      action+
+      learn+
+      body+
+      observe+
+      breaking
+  };
+
+}
+
+function renderScore(){
+
+  const s=calculateScore();
+
+  document.getElementById("score").textContent=
+    s.total;
+
+  document.getElementById("actionScore").textContent=
+    `${s.action}/30`;
+
+  document.getElementById("learnScore").textContent=
+    `${s.learn}/20`;
+
+  document.getElementById("bodyScore").textContent=
+    `${s.body}/20`;
+
+  document.getElementById("observeScore").textContent=
+    `${s.observe}/15`;
+
+  document.getElementById("breakScore").textContent=
+    `${s.breaking}/15`;
+
+  setBar("actionBar",s.action,30);
+  setBar("learnBar",s.learn,20);
+  setBar("bodyBar",s.body,20);
+  setBar("observeBar",s.observe,15);
+  setBar("breakBar",s.breaking,15);
+
+  let msg="";
+
+  if(s.total===0)
+    msg="今天还没有足够的行动证据";
+
+  else if(s.total<30)
+    msg="有行动，但今天的证据还比较少";
+
+  else if(s.total<60)
+    msg="今天已经开始推进，而不是只想";
+
+  else if(s.total<80)
+    msg="不错，今天出现了比较明显的实际推进";
+
+  else
+    msg="今天的行动密度很高，继续保持事实记录";
+
+  document.getElementById("scoreMessage").textContent=msg;
+
+}
+
+function setBar(id,value,max){
+
+  document.getElementById(id).style.width=
+    `${Math.min(value/max*100,100)}%`;
+
+}
+
+/* 关键动作 */
+
+function loadAction(){
+
+  document.getElementById("keyAction").value=
+    db[today].keyAction||"";
+
+  document.getElementById("actionResult").value=
+    db[today].actionResult||"";
+
+  if(db[today].keyDone){
+
+    document.getElementById("completeBtn").textContent=
+      "✓ 已完成";
+
+    document.getElementById("completeBtn")
+      .classList.add("complete");
+
+    document.getElementById("resultArea")
+      .style.display="block";
+
+  }
+
+}
+
+function completeKeyAction(){
+
+  const input=document.getElementById("keyAction");
+
+  if(!input.value.trim()){
+
+    showToast("先写下今天的关键动作");
+
+    return;
+
+  }
+
+  db[today].keyAction=input.value.trim();
+
+  db[today].keyDone=!db[today].keyDone;
+
+  save();
+
+  loadAction();
+
+  renderScore();
+
+  renderAntiCheat();
+
+  showToast(
+    db[today].keyDone
+      ?"关键动作完成"
+      :"已取消完成"
+  );
+
+}
+
+/* 输入自动保存 */
+
+function saveField(field,value){
+
+  db[today][field]=value;
+
+  save();
+
+  renderAntiCheat();
+
+}
+
+/* 防糊弄 */
+
+function renderAntiCheat(){
+
+  const box=document.getElementById("antiCheat");
+
+  const tasks=db[today].tasks;
+
+  if(tasks.length===0){
+
+    box.innerHTML=
+      "等你记录今天的事情后，我再问你一个问题。";
+
+    return;
+
+  }
+
+  if(tasks.length<2){
+
+    box.innerHTML=
+      "<strong>你今天只记录了一件事。</strong><br><br>"+
+      "它是真实发生的吗？如果是真的，具体结果是什么？";
+
+    return;
+
+  }
+
+  if(!db[today].discovery){
+
+    box.innerHTML=
+      "<strong>你已经记录了事情。</strong><br><br>"+
+      "现在不要继续增加打卡数量。"+
+      "从刚才的事情里，找一个你以前不知道的东西。";
+
+    return;
+
+  }
+
+  if(!db[today].keyDone){
+
+    box.innerHTML=
+      "<strong>记录不少了。</strong><br><br>"+
+      "但今天的关键动作还没有完成。"+
+      "你是在积累记录，还是在真正推进？";
+
+    return;
+
+  }
+
+  box.innerHTML=
+    "<strong>今天的记录已经形成闭环。</strong><br><br>"+
+    "事实 → 行动 → 发现 → 下一步。";
+
+}
+
+/* 7天 */
+
+function renderWeek(){
+
+  const box=document.getElementById("week");
+
+  box.innerHTML="";
+
+  const now=new Date();
+
+  for(let i=6;i>=0;i--){
+
+    const d=new Date(now);
+
+    d.setDate(now.getDate()-i);
+
+    const key=
+      d.getFullYear()+"-"+
+      String(d.getMonth()+1).padStart(2,"0")+"-"+
+      String(d.getDate()).padStart(2,"0");
+
+    const data=db[key];
+
+    let score=0;
+
+    if(data){
+
+      const oldToday=db[today];
+
+      db[today]=data;
+
+      score=calculateScore().total;
+
+      db[today]=oldToday;
+
+    }
+
+    const day=document.createElement("div");
+
+    day.className="day";
+
+    day.innerHTML=`
+
+      <div>
+        ${d.getMonth()+1}/${d.getDate()}
+      </div>
+
+      <div class="day-score ${score>0?"active":""}">
+        ${score}
+      </div>
+
+    `;
+
+    box.appendChild(day);
+
+  }
+
+}
+
+/* HTML 安全 */
+
+function escape(text){
+
+  const div=document.createElement("div");
+
+  div.textContent=text;
+
+  return div.innerHTML;
+
+}
+
+/* 总渲染 */
+
+function render(){
+
+  renderTasks();
+
+  renderScore();
+
+  loadAction();
+
+  renderAntiCheat();
+
+  renderWeek();
+
+}
+
+/* 夜间 */
+
+function toggleTheme(){
+
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+    "life_theme_v3",
+    document.body.classList.contains("dark")
+      ?"dark"
+      :"light"
+  );
+
+}
+
+function loadTheme(){
+
+  if(
+    localStorage.getItem("life_theme_v3")==="dark"
+  ){
+
+    document.body.classList.add("dark");
+
+  }
+
+}
+
+/* 自动保存文本 */
+
+["keyAction","discovery","tomorrow"].forEach(id=>{
+
+  document.getElementById(id)
+    .addEventListener("input",function(){
+
+      const field=id;
+
+      db[today][field]=this.value;
+
+      save();
+
+      renderAntiCheat();
+
+    });
+
+});
+
+/* 启动 */
+
+initDate();
+
+loadTheme();
+
+document.getElementById("discovery").value=
+  db[today].discovery||"";
+
+document.getElementById("tomorrow").value=
+  db[today].tomorrow||"";
+
+render();
+
 </script>
+
 </body>
 </html>
